@@ -1,4 +1,4 @@
-package com.example.fridgeapprator;
+package com.example.fridgeapprator.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

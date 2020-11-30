@@ -1,4 +1,4 @@
-package com.example.fridgeapprator;
+package com.example.fridgeapprator.database;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,13 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.fridgeapprator.dao.ProductDao;
+import com.example.fridgeapprator.dao.ProductTypeDao;
 import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.model.ProductType;
+import com.example.fridgeapprator.model.ShoppingList;
+import com.example.fridgeapprator.model.ShoppingListProduct;
 
-
-@Database(entities = {Product.class, ProductType.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
+@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 1, exportSchema = false)
 public abstract class IHSDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();

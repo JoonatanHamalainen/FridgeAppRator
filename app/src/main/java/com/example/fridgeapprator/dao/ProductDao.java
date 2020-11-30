@@ -1,4 +1,4 @@
-package com.example.fridgeapprator;
+package com.example.fridgeapprator.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -18,7 +18,7 @@ public interface ProductDao {
     @Query("SELECT * from product where productID = :productID")
     Product getProduct(int productID);
 
-    @Query("SELECT * from product ORDER BY productName ASC")
+    @Query("SELECT * from product")
     LiveData<List<Product>> getAllProducts();
 
 }

@@ -1,13 +1,13 @@
-package com.example.fridgeapprator;
+package com.example.fridgeapprator.viewModel;
 
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.model.ProductType;
 import com.example.fridgeapprator.model.ProductTypeWithProducts;
+import com.example.fridgeapprator.repository.ProductTypeRepository;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class ProductTypeViewModel extends AndroidViewModel {
         allProductTypes = productTypeRepository.getAllProductTypes();
     }
 
-    LiveData<List<ProductTypeWithProducts>> getAllProductTypes() {
+    public LiveData<List<ProductTypeWithProducts>> getAllProductTypes() {
         return allProductTypes;
     }
 

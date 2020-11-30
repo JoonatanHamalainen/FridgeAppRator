@@ -8,7 +8,10 @@ import android.os.Bundle;
 
 import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.model.ProductType;
+import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
+import com.example.fridgeapprator.viewModel.ProductViewModel;
 
+import java.sql.Date;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.insert(new ProductType("Maito", 1));
-        productViewModel.insert(new Product("Valion maito", 1));
+        productViewModel.insert(new Product(1, new Date(2020-11-28)));
 
         try {
             System.out.println(productViewModel.getProduct(1).getProductTypeID());
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < productViewModel.getAllProducts().getValue().size(); i++) {
-            System.out.println(productViewModel.getAllProducts().getValue().get(i).getProductName());
+            System.out.println(productViewModel.getAllProducts().getValue().get(i).getExpirationDate());
         }
 
 
