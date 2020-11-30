@@ -1,4 +1,4 @@
-package com.example.fridgeapprator;
+package com.example.fridgeapprator.viewModel;
 
 import android.app.Application;
 
@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.fridgeapprator.model.Product;
+import com.example.fridgeapprator.repository.ProductRepository;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -22,7 +23,7 @@ public class ProductViewModel extends AndroidViewModel {
         allProducts = productRepository.getAllProducts();
     }
 
-    LiveData<List<Product>> getAllProducts() {
+    public LiveData<List<Product>> getAllProducts() {
         return allProducts;
     }
 

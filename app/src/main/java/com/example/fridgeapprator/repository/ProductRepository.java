@@ -1,10 +1,12 @@
-package com.example.fridgeapprator;
+package com.example.fridgeapprator.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.fridgeapprator.dao.ProductDao;
+import com.example.fridgeapprator.database.IHSDatabase;
 import com.example.fridgeapprator.model.Product;
 
 import java.util.List;
@@ -13,13 +15,13 @@ public class ProductRepository {
     private ProductDao productDao;
     private LiveData<List<Product>> allProducts;
 
-    ProductRepository(Application application) {
+    public ProductRepository(Application application) {
         IHSDatabase db = IHSDatabase.getDatabase(application);
         productDao = db.productDao();
         allProducts = productDao.getAllProducts();
     }
 
-    LiveData<List<Product>> getAllProducts() {
+    public LiveData<List<Product>> getAllProducts() {
         return allProducts;
     }
 
