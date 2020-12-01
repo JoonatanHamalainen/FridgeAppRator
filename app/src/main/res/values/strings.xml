@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">FridgeAppRator</string>
+    <string name="shoppingList">Ostoslista</string>
+    <string name="fridge">Jääkaappi</string>
+    <string name="addProduct">Lisää Tuote Jääkaappiin</string>
+    <string name="instructions">Ohjeet</string>
+    <string name="shoppingListName">Anna Ostoslistan Nimi</string>
 </resources>
