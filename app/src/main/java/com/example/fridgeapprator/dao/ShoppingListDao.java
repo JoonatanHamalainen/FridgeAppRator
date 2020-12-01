@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.model.ShoppingList;
@@ -17,9 +18,11 @@ public interface ShoppingListDao {
     @Insert
     void insert(ShoppingList shoppingList);
 
+    @Transaction
     @Query("SELECT * FROM shoppinglist")
     LiveData<List<ShoppingListWithShoppingListProducts>> getShoppingListsWithShoppingListProducts();
 
+    @Transaction
     @Query("SELECT * FROM shoppinglist WHERE shoppingListID = :shoppingListID")
     LiveData<List<ShoppingListWithShoppingListProducts>> getShoppingListWithItsProducts(int shoppingListID);
 }

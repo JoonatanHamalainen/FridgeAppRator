@@ -2,9 +2,10 @@ package com.example.fridgeapprator.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "shoppinglistproduct")
+@Entity(tableName = "shoppinglistproduct", foreignKeys = @ForeignKey(entity = ShoppingList.class, parentColumns = "shoppingListID", childColumns = "shoppingListID"))
 public class ShoppingListProduct {
     @PrimaryKey(autoGenerate = true)
     private int shoppingListProductID;
@@ -17,6 +18,10 @@ public class ShoppingListProduct {
         this.productTypeName = productTypeName;
         this.amount = amount;
         this.shoppingListID = shoppingListID;
+    }
+
+    public void setShoppingListProductID(int shoppingListProductID) {
+        this.shoppingListProductID = shoppingListProductID;
     }
 
     public int getShoppingListProductID() {

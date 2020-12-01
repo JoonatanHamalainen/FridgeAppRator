@@ -10,6 +10,7 @@ import com.example.fridgeapprator.database.IHSDatabase;
 import com.example.fridgeapprator.model.Product;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ProductRepository {
     private ProductDao productDao;
@@ -28,8 +29,8 @@ public class ProductRepository {
     public void insert(Product p) {
         new insertAsyncTask(productDao).execute(p);
     }
-    public AsyncTask<Integer, Void, Product> getProduct(int id) {
-        return new getProd1AsyncTask(productDao).execute(id);
+    public Product getProduct(int id) throws ExecutionException, InterruptedException {
+        return new getProd1AsyncTask(productDao).execute(id).get();
     }
 
     //

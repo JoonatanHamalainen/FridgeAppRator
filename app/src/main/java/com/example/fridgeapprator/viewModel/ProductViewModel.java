@@ -28,7 +28,7 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
     public Product getProduct(int id) throws ExecutionException, InterruptedException {
-        return productRepository.getProduct(id).get();
+        return productRepository.getProduct(id);
     }
 
     public void insert(Product p) {
