@@ -19,10 +19,6 @@ public class ShoppingList {
         return shoppingListID;
     }
 
-    public void setShoppingListID(int shoppingListID) {
-        this.shoppingListID = shoppingListID;
-    }
-
     @NonNull
     public String getShoppingListName() {
         return shoppingListName;
