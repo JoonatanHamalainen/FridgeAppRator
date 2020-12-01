@@ -2,12 +2,13 @@ package com.example.fridgeapprator.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.sql.Date;
 
 
-@Entity(tableName = "product")
+@Entity(tableName = "product", foreignKeys = @ForeignKey(entity = ProductType.class, parentColumns = "productTypeID", childColumns = "productTypeID"))
 public class Product {
     @PrimaryKey(autoGenerate = true)
     private int productID;

@@ -15,6 +15,10 @@ public class ShoppingList {
         this.shoppingListName = shoppingListName;
     }
 
+    public void setShoppingListID(int shoppingListID) {
+        this.shoppingListID = shoppingListID;
+    }
+
     public int getShoppingListID() {
         return shoppingListID;
     }

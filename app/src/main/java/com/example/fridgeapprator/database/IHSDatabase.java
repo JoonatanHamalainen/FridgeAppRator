@@ -20,7 +20,7 @@ import com.example.fridgeapprator.model.ShoppingList;
 import com.example.fridgeapprator.model.ShoppingListProduct;
 
 @TypeConverters({Converters.class})
-@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 1, exportSchema = false)
+@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 5, exportSchema = false)
 public abstract class IHSDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
@@ -39,6 +39,7 @@ public abstract class IHSDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             IHSDatabase.class, "fridge_database")
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
