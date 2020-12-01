@@ -1,6 +1,7 @@
 package com.example.fridgeapprator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.insert(new ProductType("Maito", 1));
@@ -47,19 +51,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-        for (int i = 0; i < productViewModel.getAllProducts().getValue().size(); i++) {
-            System.out.println(productViewModel.getAllProducts().getValue().get(i).getExpirationDate());
-        }
-
-
-        for (int i = 0; i < productTypeViewModel.getAllProductTypes().getValue().size(); i++) {
-            System.out.println(productTypeViewModel.getAllProductTypes().getValue().get(i));
-        }
-
-
-
 
     }
 }
