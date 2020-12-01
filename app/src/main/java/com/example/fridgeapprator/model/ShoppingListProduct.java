@@ -23,10 +23,6 @@ public class ShoppingListProduct {
         return shoppingListProductID;
     }
 
-    public void setShoppingListProductID(int shoppingListProductID) {
-        this.shoppingListProductID = shoppingListProductID;
-    }
-
     @NonNull
     public String getProductTypeName() {
         return productTypeName;

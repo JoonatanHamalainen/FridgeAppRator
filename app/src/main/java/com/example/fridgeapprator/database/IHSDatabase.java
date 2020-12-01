@@ -12,6 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.fridgeapprator.dao.ProductDao;
 import com.example.fridgeapprator.dao.ProductTypeDao;
+import com.example.fridgeapprator.dao.ShoppingListDao;
+import com.example.fridgeapprator.dao.ShoppingListProductDao;
 import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.model.ProductType;
 import com.example.fridgeapprator.model.ShoppingList;
@@ -23,6 +25,8 @@ public abstract class IHSDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
     public abstract ProductTypeDao productTypeDao();
+    public abstract ShoppingListDao shoppingListDao();
+    public abstract ShoppingListProductDao shoppingListProductDao();
 
 
     private static IHSDatabase INSTANCE;

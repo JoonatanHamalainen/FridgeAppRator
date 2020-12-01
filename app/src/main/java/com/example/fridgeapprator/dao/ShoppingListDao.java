@@ -19,4 +19,7 @@ public interface ShoppingListDao {
 
     @Query("SELECT * FROM shoppinglist")
     LiveData<List<ShoppingListWithShoppingListProducts>> getShoppingListsWithShoppingListProducts();
+
+    @Query("SELECT * FROM shoppinglist WHERE shoppingListID = :shoppingListID")
+    LiveData<List<ShoppingListWithShoppingListProducts>> getShoppingListWithItsProducts(int shoppingListID);
 }
