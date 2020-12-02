@@ -45,6 +45,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         try {
+            productViewModel.getProductByIdTest(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            productViewModel.getProductByIdTest2(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
             System.out.println(shoppingListProductViewModel.getShoppingListProduct(1).getProductTypeName());
         } catch (ExecutionException e) {
             e.printStackTrace();

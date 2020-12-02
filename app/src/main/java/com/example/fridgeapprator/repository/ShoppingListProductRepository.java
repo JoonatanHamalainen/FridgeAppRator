@@ -55,6 +55,7 @@ public class ShoppingListProductRepository {
 
         @Override
         protected ShoppingListProduct doInBackground(Integer... integers) {
+            System.out.println("Shoppinglist thread: " + Thread.currentThread().getName());
             return shoppingListProductAsyncTaskDao.getShoppingListProduct(integers[0]);
         }
     }
