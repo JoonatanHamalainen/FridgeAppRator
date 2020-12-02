@@ -2,7 +2,12 @@
     <string name="app_name">FridgeAppRator</string>
     <string name="shoppingList">Ostoslista</string>
     <string name="fridge">Jääkaappi</string>
-    <string name="addProduct">Lisää Tuote Jääkaappiin</string>
+    <string name="addProduct">Anna Lisättävä Tuote</string>
     <string name="instructions">Ohjeet</string>
     <string name="shoppingListName">Anna Ostoslistan Nimi</string>
+    <string name="defaultAmount">1</string>
+    <string name="newProductName">Anna Lisättävä Tuote</string>
+    <string name="button_addProduct">Lisää Tuote Jääkaappiin</string>
+    <string name="button_newShoppingList">Luo Uusi Ostoslista</string>
+    <string name="button_instructions">Ohjeet</string>
 </resources>
