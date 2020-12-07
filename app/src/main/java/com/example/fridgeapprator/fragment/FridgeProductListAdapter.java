@@ -32,7 +32,9 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
     private final LayoutInflater inflater;
     private List<ProductTypeWithProducts> productTypes = null;
 
-    FridgeProductListAdapter(Context context) {inflater = LayoutInflater.from(context);}
+    FridgeProductListAdapter(Context context) {
+        inflater = LayoutInflater.from(context);
+    }
 
     @NonNull
     @Override
@@ -45,10 +47,8 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
     public void onBindViewHolder(@NonNull FridgeProductViewHolder holder, int position) {
         if (productTypes != null) {
             ProductTypeWithProducts current = productTypes.get(position);
-            //current.productType.getProductTypeName()
-            //current.productType.getAmount()
-            holder.fridgeProductTypeName.setText("lololoolo");
-            holder.fridgeProductTypeAmount.setText("10111");
+            holder.fridgeProductTypeName.setText(current.productType.getProductTypeName());
+            holder.fridgeProductTypeAmount.setText(Integer.toString(current.productType.getAmount()));
         } else {
             // Covers the case of data not being ready yet.
             holder.fridgeProductTypeName.setText(R.string.noProductsFound);
