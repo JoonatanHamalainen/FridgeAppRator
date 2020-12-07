@@ -55,14 +55,10 @@ public class MainActivity extends AppCompatActivity {
         shoppingListViewModel.insert(new ShoppingList("Joonatananin kassit"));
         shoppingListProductViewModel = new ViewModelProvider(this).get(ShoppingListProductViewModel.class);
         shoppingListProductViewModel.insert(new ShoppingListProduct("Maito", 5, 1));
+        shoppingListProductViewModel.insert(new ShoppingListProduct("Kokkare", 5, 1));
 
 
 
-
-
-
-
-            System.out.println("hmmmm maini");
 
 
         if (findViewById(R.id.fragment_container) != null) {
