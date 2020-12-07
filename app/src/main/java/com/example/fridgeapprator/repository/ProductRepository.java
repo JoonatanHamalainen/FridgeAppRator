@@ -11,8 +11,6 @@ import com.example.fridgeapprator.model.Product;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 public class ProductRepository {
     private ProductDao productDao;
@@ -28,10 +26,32 @@ public class ProductRepository {
         return allProducts;
     }
 
-    public void insert(Product p) {
-        new insertAsyncTask(productDao).execute(p);
+    public LiveData<Product> getProductById(int id) {
+        return productDao.getProduct(id);
     }
 
+    public void insert(Product product) {
+        new insertAsyncTask(productDao).execute(product);
+    }
+
+    public void delete (Product product) {
+        new deleteAsyncTask(productDao).execute(product);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<Product, Void, Void> {
+
+        private ProductDao productAsyncTaskDao;
+
+        deleteAsyncTask(ProductDao dao) {
+            productAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Product... products) {
+            productAsyncTaskDao.delete(products[0]);
+            return null;
+        }
+    }
 
     private static class insertAsyncTask extends AsyncTask<Product, Void, Void> {
 
@@ -48,45 +68,6 @@ public class ProductRepository {
         }
     }
 
-    public Product getProductById(int id) {
-        return CompletableFuture.supplyAsync(() -> productDao.getProduct(id)).join();
-
-    }
-
-
-    public CompletableFuture<String> getProductByIdTest(int id) throws InterruptedException {
-        return CompletableFuture.supplyAsync(() -> {
-            System.out.println("Threadi test1: " + Thread.currentThread().getName());
-
-            try {
-
-
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            return "Result of the asynchronous computation";
-        }).thenApply(result -> {
-            System.out.println("Threadi test1 then apply: " + Thread.currentThread().getName());
-
-            System.out.println(result);
-            return "Result of the then apply";
-        });
-
-    }
-
-
-    public CompletableFuture<String> getProductByIdTest2(int id) throws InterruptedException {
-        return CompletableFuture.supplyAsync(() -> {
-            System.out.println("Threadi test2: " + Thread.currentThread().getName());
-            return "Result of the asynchronous computation in test2";
-        }).thenApply(result -> {
-            System.out.println("Threadi test2 then aplly: " + Thread.currentThread().getName());
-            System.out.println(result);
-            return "Result of the then apply in test 2";
-        });
-    }
 
 
 }

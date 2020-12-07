@@ -26,7 +26,20 @@ public class ProductTypeViewModel extends AndroidViewModel {
         return allProductTypes;
     }
 
-    public void insert(ProductType p) {
-        productTypeRepository.insert(p);
+    public LiveData<ProductTypeWithProducts> getProductTypeWithProducts(int productTypeID) {
+        return productTypeRepository.getProductTypeWithProducts(productTypeID);
     }
+    public void insert(ProductType productType) {
+        productTypeRepository.insert(productType);
+    }
+    public void delete(ProductType productType) {
+        productTypeRepository.delete(productType);
+    }
+    public void update(ProductType productType) {
+        productTypeRepository.update(productType);
+    }
+
+
+
+
 }

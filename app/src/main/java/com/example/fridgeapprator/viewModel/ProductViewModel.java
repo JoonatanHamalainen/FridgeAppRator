@@ -9,6 +9,7 @@ import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.repository.ProductRepository;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 
@@ -28,19 +29,15 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
 
-    public Product getProductById(int id) throws InterruptedException, ExecutionException {
-        return productRepository.getProductById(id);
+    public Product getProductById(int id) {
+        return productRepository.getProductById(id).getValue();
     }
 
-    public String getProductByIdTest(int id) throws InterruptedException, ExecutionException {
-        return productRepository.getProductByIdTest(id).join();
-    }
-    public String getProductByIdTest2(int id) throws InterruptedException, ExecutionException {
-        return productRepository.getProductByIdTest2(id).join();
-    }
+    public void delete(Product product) {productRepository.delete(product);}
 
-    public void insert(Product p) {
-        productRepository.insert(p);
+
+    public void insert(Product product) {
+        productRepository.insert(product);
     }
 
 

@@ -45,38 +45,21 @@ public class MainActivity extends AppCompatActivity {
         productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.insert(new ProductType("Maito", 1));
-        productViewModel.insert(new Product(1, new Date(2020-11-28)));
+        productTypeViewModel.insert(new ProductType("Liha", 1));
+        productViewModel.insert(new Product(2, new Date(2020-11-28)));
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
         shoppingListViewModel.insert(new ShoppingList("Joonatananin kassit"));
         shoppingListProductViewModel = new ViewModelProvider(this).get(ShoppingListProductViewModel.class);
         shoppingListProductViewModel.insert(new ShoppingListProduct("Maito", 5, 1));
 
 
-        try {
-            productViewModel.getProductByIdTest(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
 
-        try {
-            productViewModel.getProductByIdTest2(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
 
 
-        try {
-            System.out.println(shoppingListProductViewModel.getShoppingListProduct(1).getProductTypeName());
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+            System.out.println("hmmmm maini");
+
 
         if (findViewById(R.id.fragment_container) != null) {
 

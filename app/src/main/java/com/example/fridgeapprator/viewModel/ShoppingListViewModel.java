@@ -22,9 +22,12 @@ public class ShoppingListViewModel extends AndroidViewModel {
         allShoppingListProducts = shoppingListRepository.getAllShoppingListProducts();
     }
 
-    public LiveData<List<ShoppingListWithShoppingListProducts>> getShoppingListWithItsProducts(int shoppingListID) {
+    public LiveData<ShoppingListWithShoppingListProducts> getShoppingListWithItsProducts(int shoppingListID) {
         return shoppingListRepository.getShoppingListAndItsProducts(shoppingListID);
     }
 
-    public void insert(ShoppingList s) {shoppingListRepository.insert(s);}
+    public void delete(ShoppingList shoppingList) {
+        shoppingListRepository.delete(shoppingList);
+    }
+    public void insert(ShoppingList shoppingList) {shoppingListRepository.insert(shoppingList);}
 }

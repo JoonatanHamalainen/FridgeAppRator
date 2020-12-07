@@ -26,24 +26,57 @@ public class ProductTypeRepository {
         return allProductTypes;
     }
 
+    public LiveData<ProductTypeWithProducts> getProductTypeWithProducts(int productTypeID) {
+        return productTypeDao.getProductTypeWithProducts(productTypeID);
+    }
 
-    public void insert(ProductType p) {
-        new insertAsyncTask(productTypeDao).execute(p);
+
+    public void insert(ProductType productType) {
+        new insertAsyncTask(productTypeDao).execute(productType);
+    }
+    public void delete(ProductType productType) {
+        new deleteAsyncTask(productTypeDao).execute(productType);
+    }
+    public void update(ProductType productType) {
+        new updateAsyncTask(productTypeDao).execute(productType);
     }
 
 
     private static class insertAsyncTask extends AsyncTask<ProductType, Void, Void> {
-
         private ProductTypeDao productTypeAsyncTaskDao;
-
         insertAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
-
-
         @Override
         protected Void doInBackground(ProductType... productTypes) {
             productTypeAsyncTaskDao.insert(productTypes[0]);
+            return null;
+        }
+
+    }
+
+    private static class updateAsyncTask extends AsyncTask<ProductType, Void, Void> {
+        private ProductTypeDao productTypeAsyncTaskDao;
+        updateAsyncTask(ProductTypeDao dao) {
+            productTypeAsyncTaskDao = dao;
+        }
+        @Override
+        protected Void doInBackground(ProductType... productTypes) {
+            productTypeAsyncTaskDao.update(productTypes[0]);
+            return null;
+        }
+
+    }
+
+
+    private static class deleteAsyncTask extends AsyncTask<ProductType, Void, Void> {
+        private ProductTypeDao productTypeAsyncTaskDao;
+        deleteAsyncTask(ProductTypeDao dao) {
+            productTypeAsyncTaskDao = dao;
+        }
+        @Override
+        protected Void doInBackground(ProductType... productTypes) {
+            productTypeAsyncTaskDao.delete(productTypes[0]);
             return null;
         }
     }

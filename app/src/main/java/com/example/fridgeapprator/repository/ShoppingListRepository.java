@@ -25,13 +25,20 @@ public class ShoppingListRepository {
     public LiveData<List<ShoppingListWithShoppingListProducts>> getAllShoppingListProducts() {
         return allShoppingListProducts;
     }
-     public void insert(ShoppingList s) {
-        new insertAsyncTask(shoppingListDao).execute(s);
-     }
 
-     public LiveData<List<ShoppingListWithShoppingListProducts>> getShoppingListAndItsProducts(int shoppingListID) {
+
+    public LiveData<ShoppingListWithShoppingListProducts> getShoppingListAndItsProducts(int shoppingListID) {
         return shoppingListDao.getShoppingListWithItsProducts(shoppingListID);
-     }
+    }
+
+
+    public void insert(ShoppingList shoppingList) {
+        new insertAsyncTask(shoppingListDao).execute(shoppingList);
+    }
+
+    public void delete (ShoppingList shoppingList) {
+        new deleteAsyncTask(shoppingListDao).execute(shoppingList);
+    }
 
     private static class insertAsyncTask extends AsyncTask<ShoppingList, Void, Void> {
 
@@ -48,5 +55,23 @@ public class ShoppingListRepository {
             return null;
         }
     }
+
+    private static class deleteAsyncTask extends AsyncTask<ShoppingList, Void, Void> {
+
+        private ShoppingListDao shoppingListAsyncTaskDao;
+
+        deleteAsyncTask(ShoppingListDao dao) {
+            shoppingListAsyncTaskDao = dao;
+        }
+
+
+        @Override
+        protected Void doInBackground(ShoppingList... shoppingLists) {
+            shoppingListAsyncTaskDao.delete(shoppingLists[0]);
+            return null;
+        }
+    }
+
+
 }
 
