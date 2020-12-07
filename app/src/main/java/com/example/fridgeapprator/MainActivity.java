@@ -10,7 +10,11 @@ import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.fridgeapprator.fragment.FridgeProductListAdapter;
+import com.example.fridgeapprator.fragment.FridgeProductListFragment;
 import com.example.fridgeapprator.fragment.ShoppingListFragment;
 import com.example.fridgeapprator.fragment.WelcomePageFragment;
 import com.example.fridgeapprator.model.Product;
@@ -81,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
             transaction.commit();
         }
 
+
+
     }
 
     @Override
@@ -100,18 +106,24 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        /*if (id == R.id.menu_shoppingList) {
-            //FragmentManager fragmentManager = getSupportFragmentManager();
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.layout.shopping_list_fragment);
+        if (id == R.id.menu_shoppingList) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             //transaction.remove(fragment).commit(); // wipe the old
             ShoppingListFragment shoppingListFragment = new ShoppingListFragment();
             transaction.addToBackStack(null);
             transaction.replace(R.id.fragment_container, shoppingListFragment)
                     .commit();
-        }*/
-        return true;
+            return true;
+        }
+        else if (id == R.id.menu_fridge) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            //transaction.remove(fragment).commit(); // wipe the old
+            ShoppingListFragment shoppingListFragment = new ShoppingListFragment();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment_container, shoppingListFragment)
+                    .commit();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
-
-
 }

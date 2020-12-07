@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fridgeapprator.R;
 
-public class ShoppingListFragment extends Fragment {
+public class  ShoppingListFragment extends Fragment {
 
     public ShoppingListFragment() {}
 
