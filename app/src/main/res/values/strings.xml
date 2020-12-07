@@ -10,4 +10,5 @@
     <string name="button_addProduct">Lisää Tuote Jääkaappiin</string>
     <string name="button_newShoppingList">Luo Uusi Ostoslista</string>
     <string name="button_instructions">Ohjeet</string>
+    <string name="noProductsFound">No products</string>
 </resources>
