@@ -14,6 +14,8 @@ import com.example.fridgeapprator.R;
 import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.model.ShoppingListWithShoppingListProducts;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -68,6 +70,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     void setShoppingListWithItsProducts(ShoppingListWithShoppingListProducts shoppingListWithItsProducts){
         this.shoppingListWithItsProducts = shoppingListWithItsProducts;
+        Collections.reverse(this.shoppingListWithItsProducts.shoppingListProducts);
         notifyDataSetChanged();
     }
 
@@ -75,7 +78,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     @Override
     public int getItemCount() {
         if(shoppingListWithItsProducts != null)
-            return 1;
+            return shoppingListWithItsProducts.shoppingListProducts.size();
         return 0;
     }
 

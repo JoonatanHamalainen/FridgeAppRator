@@ -57,10 +57,6 @@ public class MainActivity extends AppCompatActivity {
         shoppingListProductViewModel.insert(new ShoppingListProduct("Maito", 5, 1));
         shoppingListProductViewModel.insert(new ShoppingListProduct("Kokkare", 5, 1));
 
-
-
-
-
         if (findViewById(R.id.fragment_container) != null) {
 
             // However, if we're being restored from a previous state,
@@ -80,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
             // Commit the transaction
             transaction.commit();
         }
-
-
 
     }
 
