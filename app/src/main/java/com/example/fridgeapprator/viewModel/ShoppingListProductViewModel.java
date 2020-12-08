@@ -15,6 +15,7 @@ public class ShoppingListProductViewModel extends AndroidViewModel {
 
     private ShoppingListProductRepository shoppingListProductRepository;
 
+
     public ShoppingListProductViewModel(@NonNull Application application) {
         super(application);
         shoppingListProductRepository = new ShoppingListProductRepository(application);
@@ -24,7 +25,7 @@ public class ShoppingListProductViewModel extends AndroidViewModel {
         return shoppingListProductRepository.getShoppingListProduct(shoppingListProductID);
     }
 
-    public LiveData<List<ShoppingListProduct>> getShoppingListProduct() {
+    public LiveData<List<ShoppingListProduct>> getAllShoppingListProducts() {
         return shoppingListProductRepository.getAllShoppingListProducts();
     }
 
