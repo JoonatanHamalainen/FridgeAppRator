@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -17,16 +16,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
-import com.example.fridgeapprator.model.ProductType;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 public class FridgeProductListFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    FridgeProductListAdapter adapter;
+    RecyclerView fridgeRecyclerView, productRecyclerView;
+    FridgeProductListAdapter fridgeProductListAdapter;
+    ProductListAdapter productListAdapter;
+
     private ProductTypeViewModel productTypeViewModel;
     private OnItemTouchClickListener itemTouchListener;
     private FloatingActionButton addProductButton;
@@ -66,33 +64,56 @@ public class FridgeProductListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        adapter = new FridgeProductListAdapter(inflater.getContext());
+        fridgeProductListAdapter = new FridgeProductListAdapter(inflater.getContext());
+        productListAdapter = new ProductListAdapter(inflater.getContext());
+
         productTypeViewModel = ViewModelProviders.of(this).get(ProductTypeViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
-            adapter.setProductTypes(productTypes);
+            fridgeProductListAdapter.setProductTypes(productTypes);
         });
+
         View view = inflater.inflate(R.layout.fridge_item_list_fragment, container, false);
         this.addProductButton = view.findViewById(R.id.floatingButtonAddProduct);
-        recyclerView = view.findViewById(R.id.recyclerView);
+        fridgeRecyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
-                recyclerView, new RecyclerTouchListener.ClickListener() {
+        fridgeRecyclerView.setLayoutManager(llm);
+        fridgeRecyclerView.setAdapter(fridgeProductListAdapter);
+        fridgeRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
+                fridgeRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
+                View popupView = inflater.inflate(R.layout.show_products_popup_window, container, false);
+                productRecyclerView = popupView.findViewById(R.id.showProductsRecyclerView);
+                LinearLayoutManager llm2 = new LinearLayoutManager(getActivity());
+                productRecyclerView.setLayoutManager(llm2);
+                productRecyclerView.setAdapter(productListAdapter);
 
-                //Toast.makeText(getActivity(), position+ " is selected successfully", Toast.LENGTH_SHORT).show();
+                productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
+                    productListAdapter.setProducts(productTypes.get(position).products);
+                });
 
-                //handle click event
-                String productTypeName = adapter.getName(view); // get currency info from adapter
-                int productTypeAmountI = adapter.getAmount(view);
-                String productTypeAmountS = Integer.toString(productTypeAmountI);
-                /*XMLCurrency curr = new XMLCurrency();
-                curr.setName(currencyName);
-                curr.setRelation(currencyRelation);
-                mCallback.onCurrencySelected(curr);*/
+                // create the popup window
+                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+
+
+
             }
 
             @Override
