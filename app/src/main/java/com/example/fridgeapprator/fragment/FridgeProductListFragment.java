@@ -20,12 +20,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
+import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.model.ProductType;
+import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.example.fridgeapprator.viewModel.ProductViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.sql.Date;
+import java.util.List;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -146,11 +149,29 @@ public class FridgeProductListFragment extends Fragment {
                         if (!newProductTypeName.getText().toString().equals("") && !expirationDate.getText().toString().equals("")) {
                             String newProductTypeNameValue = newProductTypeName.getText().toString();
                             Date expirationDateValue =  Date.valueOf(expirationDate.getText().toString());
-                            if (productTypeViewModel.getAllProductTypes().getValue().contains(newProductTypeNameValue))
-                            productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
+                            List<ProductTypeWithProducts> productTypes = productTypeViewModel.getAllProductTypes().getValue();
+                            boolean found = false;
+                            ProductType productType = null;
+                            for(int i = 0; i < productTypes.size(); i++) {
+                                productType = productTypes.get(i).productType;
+                                String name = productType.getProductTypeName();
 
-
+                                if(name.equals(newProductTypeNameValue)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found) {
+                                productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
+                                List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
+                                productViewModel.insert(new Product(updatedProductTypes.get(updatedProductTypes.size() -1 ).productType.getProductTypeID(), expirationDateValue));
+                            }
+                            else {
+                                productType.setAmount(productType.getAmount() + 1);
+                                productTypeViewModel.update(productType);
+                            }
                         }
+                        popupWindow.dismiss();
                     }
                 });
             }
