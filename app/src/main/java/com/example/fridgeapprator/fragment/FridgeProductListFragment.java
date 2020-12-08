@@ -7,6 +7,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -19,7 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fridgeapprator.R;
 import com.example.fridgeapprator.model.ProductType;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
+import com.example.fridgeapprator.viewModel.ProductViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.sql.Date;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -28,6 +34,7 @@ public class FridgeProductListFragment extends Fragment {
     RecyclerView recyclerView;
     FridgeProductListAdapter adapter;
     private ProductTypeViewModel productTypeViewModel;
+    private ProductViewModel productViewModel;
     private OnItemTouchClickListener itemTouchListener;
     private FloatingActionButton addProductButton;
     //private onCurrencySelectListener mCallback;
@@ -68,6 +75,7 @@ public class FridgeProductListFragment extends Fragment {
                              Bundle savedInstanceState) {
         adapter = new FridgeProductListAdapter(inflater.getContext());
         productTypeViewModel = ViewModelProviders.of(this).get(ProductTypeViewModel.class);
+        productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
             adapter.setProductTypes(productTypes);
         });
@@ -106,8 +114,13 @@ public class FridgeProductListFragment extends Fragment {
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 // inflate the layout of the popup window
                 View popupView = inflater.inflate(R.layout.add_product_popup_window, container, false);
+                ImageButton cancelButton = popupView.findViewById(R.id.buttonCancel);
+                Button addNewProductButton = popupView.findViewById(R.id.buttonAddNewProduct);
+                EditText newProductTypeName = popupView.findViewById(R.id.inputNewProductTypeName);
+                EditText expirationDate = popupView.findViewById(R.id.inputNewProductExpirationDate);
 
                 // create the popup window
                 int width = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -120,11 +133,24 @@ public class FridgeProductListFragment extends Fragment {
                 popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
                 // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
+                cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public boolean onTouch(View v, MotionEvent event) {
+                    public void onClick(View view) {
                         popupWindow.dismiss();
-                        return true;
+                    }
+                });
+
+                addNewProductButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!newProductTypeName.getText().toString().equals("") && !expirationDate.getText().toString().equals("")) {
+                            String newProductTypeNameValue = newProductTypeName.getText().toString();
+                            Date expirationDateValue =  Date.valueOf(expirationDate.getText().toString());
+                            if (productTypeViewModel.getAllProductTypes().getValue().contains(newProductTypeNameValue))
+                            productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
+
+
+                        }
                     }
                 });
             }
