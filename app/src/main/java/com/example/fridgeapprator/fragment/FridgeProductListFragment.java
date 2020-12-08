@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -71,8 +72,8 @@ public class FridgeProductListFragment extends Fragment {
         pProductTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
             adapter.setProductTypes(productTypes);
         });
-
         View view = inflater.inflate(R.layout.fridge_item_list_fragment, container, false);
+        this.addProductButton = view.findViewById(R.id.floatingButtonAddProduct);
         recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
@@ -86,8 +87,8 @@ public class FridgeProductListFragment extends Fragment {
                 //Toast.makeText(getActivity(), position+ " is selected successfully", Toast.LENGTH_SHORT).show();
 
                 //handle click event
-                String productTypeName  = adapter.getName(view); // get currency info from adapter
-                int productTypeAmountI =  adapter.getAmount(view);
+                String productTypeName = adapter.getName(view); // get currency info from adapter
+                int productTypeAmountI = adapter.getAmount(view);
                 String productTypeAmountS = Integer.toString(productTypeAmountI);
                 /*XMLCurrency curr = new XMLCurrency();
                 curr.setName(currencyName);
@@ -106,9 +107,7 @@ public class FridgeProductListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // inflate the layout of the popup window
-inflater = (LayoutInflater)
-                        getSystemService(LAYOUT_INFLATER_SERVICE);
-                View popupView = inflater.inflate(R.layout.popup_window, null);
+                View popupView = inflater.inflate(R.layout.add_product_popup_window, container, false);
 
                 // create the popup window
                 int width = LinearLayout.LayoutParams.WRAP_CONTENT;
