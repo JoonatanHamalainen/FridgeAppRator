@@ -17,6 +17,7 @@ public class Product {
 
     private int productTypeID;
 
+
     public Product(int productTypeID, Date expirationDate) {
         this.productTypeID = productTypeID;
         this.expirationDate = expirationDate;
