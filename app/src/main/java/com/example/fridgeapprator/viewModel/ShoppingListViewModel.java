@@ -14,19 +14,19 @@ import java.util.List;
 public class ShoppingListViewModel extends AndroidViewModel {
 
     private final ShoppingListRepository shoppingListRepository;
-    private LiveData<List<ShoppingListWithShoppingListProducts>> allShoppingListProducts;
+    private LiveData<ShoppingListWithShoppingListProducts> allShoppingListProducts;
 
     public ShoppingListViewModel(Application application) {
         super(application);
         shoppingListRepository = new ShoppingListRepository(application);
-        allShoppingListProducts = shoppingListRepository.getAllShoppingListProducts();
+        allShoppingListProducts = shoppingListRepository.getShoppingListAndItsProducts(1);
     }
 
     public LiveData<ShoppingListWithShoppingListProducts> getShoppingListWithItsProducts(int shoppingListID) {
         return shoppingListRepository.getShoppingListAndItsProducts(shoppingListID);
     }
 
-    public LiveData<List<ShoppingListWithShoppingListProducts>> getAllShoppingListProducts() {
+    public LiveData<ShoppingListWithShoppingListProducts> getAllShoppingListProducts() {
         return allShoppingListProducts;
     }
 

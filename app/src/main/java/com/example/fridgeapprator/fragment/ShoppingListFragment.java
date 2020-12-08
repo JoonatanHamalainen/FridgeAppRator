@@ -62,7 +62,7 @@ public class  ShoppingListFragment extends Fragment {
         adapter = new ShoppingListAdapter(inflater.getContext());
         shoppingListViewModel = ViewModelProviders.of(this).get(ShoppingListViewModel.class);
         shoppingListProductViewModel = ViewModelProviders.of(this).get(ShoppingListProductViewModel.class);
-        shoppingListViewModel.getShoppingListWithItsProducts(1).observe(getViewLifecycleOwner(), shoppingListProducts -> {
+        shoppingListViewModel.getAllShoppingListProducts().observe(getViewLifecycleOwner(), shoppingListProducts -> {
             adapter.setShoppingListWithItsProducts(shoppingListProducts);
         });
 
@@ -109,6 +109,9 @@ public class  ShoppingListFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
+                System.out.println("printti" + shoppingListViewModel.getAllShoppingListProducts().hasActiveObservers());
+                shoppingListProductViewModel.delete(shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts.get(position));
+                // mCurrencyViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));
 
                 //pProductTypeViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));
             }

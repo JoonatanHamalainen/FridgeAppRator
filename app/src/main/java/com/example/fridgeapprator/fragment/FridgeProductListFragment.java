@@ -17,10 +17,9 @@ import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 
 public class FridgeProductListFragment extends Fragment {
 
-    ProductTypeViewModel productTypeViewModel;
     RecyclerView recyclerView;
     FridgeProductListAdapter adapter;
-    private ProductTypeViewModel pProductTypeViewModel;
+    private ProductTypeViewModel productTypeViewModel;
     private OnItemTouchClickListener itemTouchListener;
     //private onCurrencySelectListener mCallback;
 
@@ -59,8 +58,8 @@ public class FridgeProductListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         adapter = new FridgeProductListAdapter(inflater.getContext());
-        pProductTypeViewModel = ViewModelProviders.of(this).get(ProductTypeViewModel.class);
-        pProductTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
+        productTypeViewModel = ViewModelProviders.of(this).get(ProductTypeViewModel.class);
+        productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
             adapter.setProductTypes(productTypes);
         });
 
@@ -89,6 +88,7 @@ public class FridgeProductListFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
+                //productTypeViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(position).productType);
 
                 //pProductTypeViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));
             }
