@@ -20,7 +20,7 @@ import com.example.fridgeapprator.model.ShoppingList;
 import com.example.fridgeapprator.model.ShoppingListProduct;
 
 @TypeConverters({Converters.class})
-@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 17, exportSchema = false)
+@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 20, exportSchema = false)
 public abstract class IHSDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
