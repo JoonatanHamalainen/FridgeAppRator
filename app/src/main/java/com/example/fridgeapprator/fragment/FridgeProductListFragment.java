@@ -88,6 +88,7 @@ public class FridgeProductListFragment extends Fragment {
         productTypeViewModel = ViewModelProviders.of(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
+            System.out.println("okei kävimme observis settaamas");
             fridgeProductListAdapter.setProductTypes(productTypes);
         });
 
@@ -154,6 +155,7 @@ public class FridgeProductListFragment extends Fragment {
                 EditText newProductTypeName = popupView.findViewById(R.id.inputNewProductTypeName);
                 EditText expirationDate = popupView.findViewById(R.id.inputNewProductExpirationDate);
 
+
                 // create the popup window
                 int width = LinearLayout.LayoutParams.WRAP_CONTENT;
                 int height = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -193,11 +195,14 @@ public class FridgeProductListFragment extends Fragment {
                             if (!found) {
                                 productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
                                 List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
-                                productViewModel.insert(new Product(updatedProductTypes.get(updatedProductTypes.size() -1 ).productType.getProductTypeID(), expirationDateValue));
+                                // productType.getProductTypeID() +1 is there becouse  + 1 indicates the id that the producttype will get from autoincrement.
+                                productViewModel.insert(new Product(updatedProductTypes.get(updatedProductTypes.size() - 1).productType.getProductTypeID() + 1, expirationDateValue));
                             }
                             else {
                                 productType.setAmount(productType.getAmount() + 1);
+                                productViewModel.insert(new Product(productType.getProductTypeID(), expirationDateValue));
                                 productTypeViewModel.update(productType);
+
                             }
                         }
                         popupWindow.dismiss();
