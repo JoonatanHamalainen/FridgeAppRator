@@ -11,6 +11,7 @@ import com.example.fridgeapprator.model.ProductType;
 import com.example.fridgeapprator.model.ProductTypeWithProducts;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ProductTypeRepository {
     private ProductTypeDao productTypeDao;
@@ -31,9 +32,15 @@ public class ProductTypeRepository {
     }
 
 
-    public void insert(ProductType productType) {
-        new insertAsyncTask(productTypeDao).execute(productType);
+    public long insert(ProductType productType) {
+        try {
+            return new insertAsyncTask(productTypeDao).execute(productType).get();
+        } catch (ExecutionException | InterruptedException e) {
+            return 0;
+        }
+
     }
+
     public void delete(ProductType productType) {
         new deleteAsyncTask(productTypeDao).execute(productType);
     }
@@ -42,15 +49,15 @@ public class ProductTypeRepository {
     }
 
 
-    private static class insertAsyncTask extends AsyncTask<ProductType, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<ProductType, Long, Long> {
         private ProductTypeDao productTypeAsyncTaskDao;
         insertAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
         @Override
-        protected Void doInBackground(ProductType... productTypes) {
-            productTypeAsyncTaskDao.insert(productTypes[0]);
-            return null;
+        protected Long doInBackground(ProductType... productTypes) {
+            return productTypeAsyncTaskDao.insert(productTypes[0]);
+
         }
 
     }

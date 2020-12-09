@@ -54,13 +54,19 @@ public class MainActivity extends AppCompatActivity {
         productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.insert(new ProductType("Maito", 1));
-        productTypeViewModel.insert(new ProductType("Liha", 1));
-        productViewModel.insert(new Product(2, new Date(2020-11-28)));
+        ProductType productTypeLiha = new ProductType("Liha", 1);
+        int lihaid = (int)productTypeViewModel.insert(productTypeLiha);
+        productViewModel.insert(new Product(1, new Date(2020-11-28)));
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
         shoppingListViewModel.insert(new ShoppingList("Joonatananin kassit"));
         shoppingListProductViewModel = new ViewModelProvider(this).get(ShoppingListProductViewModel.class);
         shoppingListProductViewModel.insert(new ShoppingListProduct("Maito", 5, 1));
         shoppingListProductViewModel.insert(new ShoppingListProduct("Kokkare", 5, 1));
+        ProductType productTypeTesti = new ProductType("Testi", 1);
+        int testiid = (int)productTypeViewModel.insert(productTypeTesti);
+        productTypeTesti.setProductTypeID(testiid);
+        productTypeViewModel.delete(productTypeTesti);
+
 
         if (findViewById(R.id.fragment_container) != null) {
 
