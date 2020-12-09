@@ -3,11 +3,9 @@ package com.example.fridgeapprator.fragment;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,9 +31,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class FridgeProductListFragment extends Fragment {
 
@@ -47,6 +42,7 @@ public class FridgeProductListFragment extends Fragment {
     private ProductViewModel productViewModel;
     private OnItemTouchClickListener itemTouchListener;
     private FloatingActionButton addProductButton;
+    PopUpWindowController popUpWindowController;
     //private onCurrencySelectListener mCallback;
 
     public interface OnItemTouchClickListener {
@@ -85,7 +81,7 @@ public class FridgeProductListFragment extends Fragment {
                              Bundle savedInstanceState) {
         fridgeProductListAdapter = new FridgeProductListAdapter(inflater.getContext());
         productListAdapter = new ProductListAdapter(inflater.getContext());
-
+        popUpWindowController = new PopUpWindowController();
         productTypeViewModel = ViewModelProviders.of(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
@@ -104,39 +100,15 @@ public class FridgeProductListFragment extends Fragment {
                 fridgeRecyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                View popupView = inflater.inflate(R.layout.show_products_popup_window, container, false);
-                productRecyclerView = popupView.findViewById(R.id.showProductsRecyclerView);
-                LinearLayoutManager llm2 = new LinearLayoutManager(getActivity());
-                productRecyclerView.setLayoutManager(llm2);
-                productRecyclerView.setAdapter(productListAdapter);
-
-                productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
-                    productListAdapter.setProducts(productTypes.get(position).products);
-                });
-
-                // create the popup window
-                int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-                boolean focusable = true; // lets taps outside the popup also dismiss it
-                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-                // show the popup window
-                // which view you pass in doesn't matter, it is only used for the window tolken
-                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-                // dismiss the popup window when touched
-                popupView.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        popupWindow.dismiss();
-                        return true;
-                    }
-                });
-
+                popUpWindowController.showProductTypeProductsPopUp(view, container, position, inflater, getActivity(), getViewLifecycleOwner());
             }
 
             @Override
             public void onLongClick(View view, int position) {
+                //TÄNNE!
+                if (productTypeViewModel.getAllProductTypes().getValue().get(position).productType.getAmount() == 0) {
+                    productTypeViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(position).productType);
+                }
                 //productTypeViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(position).productType);
 
                 //pProductTypeViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));
