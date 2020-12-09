@@ -10,6 +10,7 @@ import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.repository.ProductTypeRepository;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ProductTypeViewModel extends AndroidViewModel {
     private ProductTypeRepository productTypeRepository;
@@ -29,8 +30,8 @@ public class ProductTypeViewModel extends AndroidViewModel {
     public LiveData<ProductTypeWithProducts> getProductTypeWithProducts(int productTypeID) {
         return productTypeRepository.getProductTypeWithProducts(productTypeID);
     }
-    public void insert(ProductType productType) {
-        productTypeRepository.insert(productType);
+    public long insert(ProductType productType)  {
+        return productTypeRepository.insert(productType);
     }
     public void delete(ProductType productType) {
         productTypeRepository.delete(productType);

@@ -33,6 +33,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -132,8 +133,6 @@ public class FridgeProductListFragment extends Fragment {
                     }
                 });
 
-
-
             }
 
             @Override
@@ -183,6 +182,7 @@ public class FridgeProductListFragment extends Fragment {
                             List<ProductTypeWithProducts> productTypes = productTypeViewModel.getAllProductTypes().getValue();
                             boolean found = false;
                             ProductType productType = null;
+                            int newId = 0;
                             for(int i = 0; i < productTypes.size(); i++) {
                                 productType = productTypes.get(i).productType;
                                 String name = productType.getProductTypeName();
@@ -193,10 +193,11 @@ public class FridgeProductListFragment extends Fragment {
                                 }
                             }
                             if (!found) {
-                                productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
+
+                                newId = (int)productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
+
                                 List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
-                                // productType.getProductTypeID() +1 is there becouse  + 1 indicates the id that the producttype will get from autoincrement.
-                                productViewModel.insert(new Product(updatedProductTypes.get(updatedProductTypes.size() - 1).productType.getProductTypeID() + 1, expirationDateValue));
+                                productViewModel.insert(new Product(newId, expirationDateValue));
                             }
                             else {
                                 productType.setAmount(productType.getAmount() + 1);

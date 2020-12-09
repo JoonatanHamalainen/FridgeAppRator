@@ -17,7 +17,7 @@ import java.util.List;
 public interface ProductTypeDao {
 
     @Insert
-    void insert(ProductType productType);
+    long insert(ProductType productType);
 
     @Update
     void update (ProductType productType);
