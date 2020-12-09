@@ -9,8 +9,7 @@ import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.repository.ProductRepository;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+
 
 
 public class ProductViewModel extends AndroidViewModel {

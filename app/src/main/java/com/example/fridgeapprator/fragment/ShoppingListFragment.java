@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
@@ -15,10 +17,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
+import com.example.fridgeapprator.model.Product;
+import com.example.fridgeapprator.model.ProductType;
+import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.model.ShoppingListProduct;
+import com.example.fridgeapprator.model.ShoppingListWithShoppingListProducts;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListProductViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListViewModel;
+
+import java.sql.Date;
+import java.util.List;
 
 public class  ShoppingListFragment extends Fragment {
 
@@ -27,9 +36,11 @@ public class  ShoppingListFragment extends Fragment {
     private ShoppingListViewModel shoppingListViewModel;
     private ShoppingListProductViewModel shoppingListProductViewModel;
     private OnItemTouchClickListener itemTouchListener;
+    private PopUpWindowController popUpWindowController;
 
     private EditText inputShoppingListName, inputNewProductName, inputAmount;
     private ImageButton addButton;
+    private Button importShoppingList;
 
     public interface OnItemTouchClickListener {
         void onItemClick(String name, double relation);
@@ -61,6 +72,7 @@ public class  ShoppingListFragment extends Fragment {
                              Bundle savedInstanceState) {
         adapter = new ShoppingListAdapter(inflater.getContext());
         shoppingListViewModel = ViewModelProviders.of(this).get(ShoppingListViewModel.class);
+        popUpWindowController = new PopUpWindowController();
         shoppingListProductViewModel = ViewModelProviders.of(this).get(ShoppingListProductViewModel.class);
         shoppingListViewModel.getAllShoppingListProducts().observe(getViewLifecycleOwner(), shoppingListProducts -> {
             adapter.setShoppingListWithItsProducts(shoppingListProducts);
@@ -72,6 +84,7 @@ public class  ShoppingListFragment extends Fragment {
         this.inputNewProductName = view.findViewById(R.id.inputNewProductTypeName);
         this.inputAmount = view.findViewById(R.id.inputAmount);
         this.addButton = view.findViewById(R.id.buttonplus);
+        this.importShoppingList = view.findViewById(R.id.buttonImportProductsToFridge);
 
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -79,13 +92,53 @@ public class  ShoppingListFragment extends Fragment {
             public void onClick(View view) {
 
                 if (!inputNewProductName.getText().toString().equals("") && Integer.parseInt(inputAmount.getText().toString()) > 0) {
-                    String name = inputNewProductName.getText().toString();
-                    int amount = Integer.parseInt(inputAmount.getText().toString());
-                    shoppingListProductViewModel.insert(new ShoppingListProduct(name, amount, 1));
+                    List<ShoppingListProduct> shoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts;
+                    String typeName = inputNewProductName.getText().toString();
+                    boolean found = false;
+                    ShoppingListProduct shoppingListProduct = null;
+                    int newId = 0;
+                    for(int i = 0; i < shoppingListProducts.size(); i++) {
+                        shoppingListProduct = shoppingListProducts.get(i);
+                        String name = shoppingListProduct.getProductTypeName();
+
+                        if(name.equals(typeName)) {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        int amount = Integer.parseInt(inputAmount.getText().toString());
+                        shoppingListProductViewModel.insert(new ShoppingListProduct(typeName, amount, 1));
+
+                    }
+                    else {
+                        shoppingListProduct.setAmount(shoppingListProduct.getAmount() + 1);
+                        shoppingListProductViewModel.update(shoppingListProduct);
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Tekstikenttä tyhjä tai määrä on alle 1", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        importShoppingList.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                ShoppingListWithShoppingListProducts shoppingListWithShoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue();
+                for (int i = 0; i < shoppingListWithShoppingListProducts.shoppingListProducts.size(); i++) {
+                    for (int j = 0; j < shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getAmount(); j++) {
+                        popUpWindowController.insertDatesPopUp(view, container, inflater, getActivity(), getViewLifecycleOwner(),
+                                shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getProductTypeName(),
+                                shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getAmount());
+
+                    }
 
                 }
             }
         });
+
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
@@ -111,6 +164,7 @@ public class  ShoppingListFragment extends Fragment {
             public void onLongClick(View view, int position) {
                 System.out.println("printti" + shoppingListViewModel.getAllShoppingListProducts().hasActiveObservers());
                 shoppingListProductViewModel.delete(shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts.get(position));
+
                 // mCurrencyViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));
 
                 //pProductTypeViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));

@@ -14,4 +14,6 @@
     <string name="popupTextAddNewProduct">Lisää Uusi Tuote Jääkaappiin</string>
     <string name="expirationDate">Anna Viimeinen Käyttöpäivä</string>
     <string name="importShoppingList">Vie Tuotteet</string>
+    <string name="buttonSkipAppProductPopUp">Ohita</string>
+    <string name="buttonAddProductPopUp">Lisää</string>
 </resources>

@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
+        /*productTypeViewModel = new ViewModelProvider(this).get(ProductTypeViewModel.class);
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productTypeViewModel.insert(new ProductType("Maito", 1));
         ProductType productTypeLiha = new ProductType("Liha", 1);
@@ -60,12 +60,17 @@ public class MainActivity extends AppCompatActivity {
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
         shoppingListViewModel.insert(new ShoppingList("Joonatananin kassit"));
         shoppingListProductViewModel = new ViewModelProvider(this).get(ShoppingListProductViewModel.class);
-        shoppingListProductViewModel.insert(new ShoppingListProduct("Maito", 5, 1));
-        shoppingListProductViewModel.insert(new ShoppingListProduct("Kokkare", 5, 1));
+        shoppingListProductViewModel.insert(new ShoppingListProduct("Maito", 2, 1));
+        shoppingListProductViewModel.insert(new ShoppingListProduct("Kokkare", 2, 1));
         ProductType productTypeTesti = new ProductType("Testi", 1);
         int testiid = (int)productTypeViewModel.insert(productTypeTesti);
         productTypeTesti.setProductTypeID(testiid);
         productTypeViewModel.delete(productTypeTesti);
+
+         */
+
+        shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
+        shoppingListViewModel.insert(new ShoppingList("Joonatananin kassit"));
 
 
         if (findViewById(R.id.fragment_container) != null) {
