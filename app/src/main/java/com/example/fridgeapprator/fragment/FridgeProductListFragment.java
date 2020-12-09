@@ -197,13 +197,6 @@ public class FridgeProductListFragment extends Fragment {
                                 newId = (int)productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
 
                                 List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
-                                // productType.getProductTypeID() +1 is there becouse  + 1 indicates the id that the producttype will get from autoincrement.
-                                //!!! VAROITUS !!! Voiko olla mahdollista, että tämä voi mennä pieleen jotenki tämä alempi koodi rivi
-                                //voi olla että tämä menee pieleen kun poistetaan producteja ja seuraava increment id ei olekkaan tuo + 1
-                                //tämä on tärkeä ottaa huomioon. Mahdollinen fixi voisi olla että listan korkein id olisi aina viimeisin ja jtn fiksua tähän päälle :D
-                                //lihaid = 10 poistetaan!
-                                //maitoid = 9 on viimenen listassa mutta seuraava autoicrement id on 11
-                                //productViewModel.insert(new Product(updatedProductTypes.get(updatedProductTypes.size() - 1).productType.getProductTypeID() + 1, expirationDateValue));
                                 productViewModel.insert(new Product(newId, expirationDateValue));
                             }
                             else {
