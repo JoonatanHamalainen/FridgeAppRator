@@ -13,4 +13,5 @@
     <string name="noProductsFound">No products</string>
     <string name="popupTextAddNewProduct">Lisää Uusi Tuote Jääkaappiin</string>
     <string name="expirationDate">Anna Viimeinen Käyttöpäivä</string>
+    <string name="importShoppingList">Vie Tuotteet</string>
 </resources>
