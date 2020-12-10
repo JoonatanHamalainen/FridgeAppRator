@@ -47,6 +47,7 @@ public class PopUpWindowController {
         productRecyclerView.setLayoutManager(llm2);
         productRecyclerView.setAdapter(productListAdapter);
 
+        //this variable represents the position of the productType object at the position of the click  in the fridge window.
         int fridgeProductTypePosition = position;
 
         productTypeViewModel.getAllProductTypes().observe(owner, productTypes -> {
@@ -56,6 +57,7 @@ public class PopUpWindowController {
             }
         });
 
+        //ehkä ongelma
         productViewModel.getAllProducts().observe(owner, products -> {
 
         });
@@ -79,9 +81,12 @@ public class PopUpWindowController {
 
             @Override
             public void onLongClick(View view, int position) {
-                productViewModel.delete(productViewModel.getAllProducts().getValue().get(position));
+                // tää rivi oli huono rivi! sen takia ei toiminu poisto.
+                // productViewModel.delete(productViewModel.getAllProducts().getValue().get(position));
+                //
+                productViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(fridgeProductTypePosition).products.get(position));
                 ProductType productType = productTypeViewModel.getAllProductTypes().getValue().get(fridgeProductTypePosition).productType;
-                productType.setAmount(productType.getAmount()-1);
+                productType.setAmount(productType.getAmount() - 1);
                 productTypeViewModel.update(productType);
 
             }
@@ -98,7 +103,7 @@ public class PopUpWindowController {
     }
 
     public void insertDatesPopUp(View view, ViewGroup container, LayoutInflater inflater,
-                                             FragmentActivity activity, LifecycleOwner owner, String typeName, int amount) {
+                                 FragmentActivity activity, LifecycleOwner owner, String typeName, int amount) {
 
         View popupView = inflater.inflate(R.layout.enter_expirationdate_popup_window, container, false);
         ProductTypeViewModel productTypeViewModel = new ViewModelProvider(activity).get(ProductTypeViewModel.class);
@@ -132,11 +137,11 @@ public class PopUpWindowController {
                 boolean found = false;
                 ProductType productType = null;
                 int newId = 0;
-                for(int i = 0; i < productTypes.size(); i++) {
+                for (int i = 0; i < productTypes.size(); i++) {
                     productType = productTypes.get(i).productType;
                     String name = productType.getProductTypeName();
 
-                    if(name.equals(typeName)) {
+                    if (name.equals(typeName)) {
                         found = true;
                         break;
                     }
@@ -144,12 +149,11 @@ public class PopUpWindowController {
                 Date expirationDateValue = Date.valueOf(editText.getText().toString());
                 if (!found) {
 
-                    newId = (int)productTypeViewModel.insert(new ProductType(typeName, 1));
+                    newId = (int) productTypeViewModel.insert(new ProductType(typeName, 1));
 
                     List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
                     productViewModel.insert(new Product(newId, expirationDateValue));
-                }
-                else {
+                } else {
                     productType.setAmount(productType.getAmount() + 1);
                     productViewModel.insert(new Product(productType.getProductTypeID(), expirationDateValue));
                     productTypeViewModel.update(productType);
@@ -171,7 +175,6 @@ public class PopUpWindowController {
         });
 
 
-
         // dismiss the popup window when touched
         popupView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -181,11 +184,6 @@ public class PopUpWindowController {
             }
         });
 
-
-
     }
-
-
-
 
 }
