@@ -106,7 +106,7 @@ public class FridgeProductListFragment extends Fragment {
             @Override
             public void onLongClick(View view, int position) {
                 //TÄNNE!
-                if (productTypeViewModel.getAllProductTypes().getValue().get(position).productType.getAmount() == 0) {
+                if (productTypeViewModel.getAllProductTypes().getValue().get(position).productType.getAmount() < 1) {
                     productTypeViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(position).productType);
                 }
                 //productTypeViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(position).productType);

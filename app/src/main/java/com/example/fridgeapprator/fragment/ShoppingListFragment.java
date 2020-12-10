@@ -162,7 +162,6 @@ public class  ShoppingListFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                System.out.println("printti" + shoppingListViewModel.getAllShoppingListProducts().hasActiveObservers());
                 shoppingListProductViewModel.delete(shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts.get(position));
 
                 // mCurrencyViewModel.delete(mCurrencyViewModel.getAllCurrencies().getValue().get(position));
