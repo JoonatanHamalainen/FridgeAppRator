@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instructionsText">
+        <br>Sisällöt:</br>
+        <br>
+
+            <br>Jääkaappi</br>
+
+            <ol>
+                <br>Yksittäisen tuotteen lisääminen</br>
+                <br>Tuotteiden viimeisen käyttöpäivän näyttäminen</br>
+                <br>Yksittäisen tuotteen poistaminen</br>
+                <br>Tuotetyypin poistaminen</br>
+            </ol>
+
+            <li>Ostoslistat</li>
+
+            <ol>
+                <br>Ostoslistan luominen</br>
+                <br>Ostoslistan valitseminen</br>
+                <br>Ostoslistan poistaminen</br>
+            </ol>
+
+            <br>Yksittäinen ostoslista</br>
+
+            <ol>
+                <br>Tuotteen lisääminen ostoslistaan</br>
+                <br>Tuotteen poistaminen ostoslistasta</br>
+                <br>Valmiin ostoslistan vieminen Jääkaappiin</br>
+
+            </ol>
+        </br>
+    </string>
+</resources>

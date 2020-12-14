@@ -47,6 +47,18 @@ public class WelcomePageFragment extends Fragment {
                         .commit();
             }
         });
+
+        toInstructions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                //transaction.remove(fragment).commit(); // wipe the old
+                InstructionsFragment instructionsFragment = new InstructionsFragment();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.fragment_container, instructionsFragment)
+                        .commit();
+            }
+        });
         return v;
     }
 }

@@ -11,9 +11,6 @@
         android:id="@+id/menu_fridge"
         android:title="@string/fridge" />
     <item
-        android:id="@+id/menu_addProduct"
-        android:title="@string/addProduct" />
-    <item
         android:id="@+id/menu_instructions"
         android:title="@string/instructions" />
 </menu>

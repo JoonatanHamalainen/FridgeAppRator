@@ -1,4 +1,4 @@
-package com.example.fridgeapprator.fragment;
+package com.example.fridgeapprator.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -32,7 +32,7 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
     private final LayoutInflater inflater;
     private List<ProductTypeWithProducts> productTypes = null;
 
-    FridgeProductListAdapter(Context context) {
+    public FridgeProductListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -66,7 +66,7 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
         );
     }
 
-    void setProductTypes(List<ProductTypeWithProducts> productTypes){
+    public void setProductTypes(List<ProductTypeWithProducts> productTypes){
         this.productTypes = productTypes;
         notifyDataSetChanged();
     }

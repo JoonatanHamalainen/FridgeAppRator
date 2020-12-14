@@ -1,4 +1,4 @@
-package com.example.fridgeapprator.fragment;
+package com.example.fridgeapprator.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
-import com.example.fridgeapprator.dao.ProductDao;
 import com.example.fridgeapprator.model.Product;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private final LayoutInflater inflater;
     private List<Product> products = null;
 
-     ProductListAdapter(Context context) {
+     public ProductListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -51,7 +50,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     }
 
-    void setProducts(List<Product> products){
+    public void setProducts(List<Product> products){
         this.products = products;
         notifyDataSetChanged();
     }
