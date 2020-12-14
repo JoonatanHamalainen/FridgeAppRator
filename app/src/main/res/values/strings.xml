@@ -16,4 +16,5 @@
     <string name="importShoppingList">Vie Tuotteet</string>
     <string name="buttonSkipAppProductPopUp">Ohita</string>
     <string name="buttonAddProductPopUp">Lisää</string>
+    <string name="instructionsHeader">Ohjeet</string>
 </resources>

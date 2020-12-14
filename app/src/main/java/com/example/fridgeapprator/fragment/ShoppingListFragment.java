@@ -11,22 +11,17 @@ import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
-import com.example.fridgeapprator.model.Product;
-import com.example.fridgeapprator.model.ProductType;
-import com.example.fridgeapprator.model.ProductTypeWithProducts;
+import com.example.fridgeapprator.adapter.ShoppingListAdapter;
 import com.example.fridgeapprator.model.ShoppingListProduct;
 import com.example.fridgeapprator.model.ShoppingListWithShoppingListProducts;
-import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListProductViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListViewModel;
 
-import java.sql.Date;
 import java.util.List;
 
 public class  ShoppingListFragment extends Fragment {
@@ -130,8 +125,7 @@ public class  ShoppingListFragment extends Fragment {
                 for (int i = 0; i < shoppingListWithShoppingListProducts.shoppingListProducts.size(); i++) {
                     for (int j = 0; j < shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getAmount(); j++) {
                         popUpWindowController.insertDatesPopUp(view, container, inflater, getActivity(), getViewLifecycleOwner(),
-                                shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getProductTypeName(),
-                                shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getAmount());
+                                shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getProductTypeName());
 
                     }
 

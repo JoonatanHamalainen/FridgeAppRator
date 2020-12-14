@@ -2,37 +2,22 @@ package com.example.fridgeapprator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
-import com.example.fridgeapprator.fragment.FridgeProductListAdapter;
 import com.example.fridgeapprator.fragment.FridgeProductListFragment;
+import com.example.fridgeapprator.fragment.InstructionsFragment;
 import com.example.fridgeapprator.fragment.ShoppingListFragment;
 import com.example.fridgeapprator.fragment.WelcomePageFragment;
-import com.example.fridgeapprator.model.Product;
-import com.example.fridgeapprator.model.ProductType;
 import com.example.fridgeapprator.model.ShoppingList;
-import com.example.fridgeapprator.model.ShoppingListProduct;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.example.fridgeapprator.viewModel.ProductViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListProductViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListViewModel;
-
-import java.sql.Date;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -81,8 +66,7 @@ public class MainActivity extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-            // create Calculator-fragment programmatically...
-            shoppingListFragment = new ShoppingListFragment();
+            //TODO: If fridge is empty open welcome page fragment. If not open the fridge fragment.
             welcomePageFragment = new WelcomePageFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             // Replace whatever is in the fragment_container view with this fragment,
@@ -124,9 +108,18 @@ public class MainActivity extends AppCompatActivity {
         else if (id == R.id.menu_fridge) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             //transaction.remove(fragment).commit(); // wipe the old
-            ShoppingListFragment shoppingListFragment = new ShoppingListFragment();
+            FridgeProductListFragment fridgeProductListFragment = new FridgeProductListFragment();
             transaction.addToBackStack(null);
-            transaction.replace(R.id.fragment_container, shoppingListFragment)
+            transaction.replace(R.id.fragment_container, fridgeProductListFragment)
+                    .commit();
+            return true;
+        }
+        else if (id == R.id.menu_instructions) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            //transaction.remove(fragment).commit(); // wipe the old
+            InstructionsFragment instructionsFragment = new InstructionsFragment();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment_container, instructionsFragment)
                     .commit();
             return true;
         }

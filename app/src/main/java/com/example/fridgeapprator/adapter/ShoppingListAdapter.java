@@ -1,4 +1,4 @@
-package com.example.fridgeapprator.fragment;
+package com.example.fridgeapprator.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,12 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
-import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.model.ShoppingListWithShoppingListProducts;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> {
@@ -44,7 +41,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     private final LayoutInflater inflater;
     private ShoppingListWithShoppingListProducts shoppingListWithItsProducts = null;
 
-    ShoppingListAdapter(Context context) {
+    public ShoppingListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -68,7 +65,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     }
 
-    void setShoppingListWithItsProducts(ShoppingListWithShoppingListProducts shoppingListWithItsProducts){
+    public void setShoppingListWithItsProducts(ShoppingListWithShoppingListProducts shoppingListWithItsProducts){
         this.shoppingListWithItsProducts = shoppingListWithItsProducts;
         Collections.reverse(this.shoppingListWithItsProducts.shoppingListProducts);
         notifyDataSetChanged();
