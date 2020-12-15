@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="300dp"
-    android:background="#62def8">
+    android:background="#4C5057">
 
     <EditText
         android:id="@+id/inputExpirationDatePopUp"
