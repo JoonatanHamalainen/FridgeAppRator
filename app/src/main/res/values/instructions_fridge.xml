@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instructionFridgeAdd">
+        <b>1. Yksittäisen tuotteen lisääminen</b>
+        \nLisää tuote painamalla Jääkaappi-näkymän oikeassa alalaidassa olevaa plus-painiketta.
+        Ruudulle avautuu syöttölomake joka pyytää antamaan lisättävän tuotteen nimen ja päiväyksen.
+        Kun tiedot on annettu, voi tuotteen lisätä painamalla Lisää Tuote Jääkaappiin -painiketta.
+        Jos jääkaapista löytyy jo tuote samalla nimellä, sen määrä lisääntyy yhdellä. Muuten
+        jääkaappiin luodaan uusi tuotetyyppi, jonka alta lisätty tuote löytyy.
+        Lomakkeen voi halutessaan myös sulkea painamalla oikean yläkulman rasti-painiketta.
+    </string>
+    <string name="instructionFridgeRemoveSingle">
+        <b>3. Yksittäisen tuotteen poistaminen</b>
+        \nPäiväysnäkymässä painamalla ja pitämällä pohjassa voi poistaa
+        yksittäisen tuotteen (päiväyksen) jääkaapista.
+    </string>
+    <string name="instructionFridgeShow">
+        <b>2. Tuotteiden viimeisen käyttöpäivän näyttäminen</b>
+        \Painamalla jotakin jääkaapissa olevaa tuotetyyppiä avautuu sen
+        päiväysnäkymä, jossa on listattuna tuotetyypin kaikkien tuotteiden viimeiset käyttöpäivät.
+    </string>
+    <string name="instructionFridgeRemoveType">
+        <b>4. Tuotetyypin poistaminen</b>
+        \nTuotetyyppi on mahdollista poistaa kokonaan jääkaapista, jos siitä ei ole enää yhtään
+        tuotetta jäljellä. Eli tuotetyypin alla näkyy 0. Poistaminen tapahtuu painamalla
+        tuotetyyppiä ja pitämällä pohjassa.
+    </string>
+</resources>

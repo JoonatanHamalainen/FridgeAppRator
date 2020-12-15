@@ -89,6 +89,7 @@ public class  ShoppingListFragment extends Fragment {
                 if (!inputNewProductName.getText().toString().equals("") && Integer.parseInt(inputAmount.getText().toString()) > 0) {
                     List<ShoppingListProduct> shoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts;
                     String typeName = inputNewProductName.getText().toString();
+                    int amount = Integer.parseInt(inputAmount.getText().toString());
                     boolean found = false;
                     ShoppingListProduct shoppingListProduct = null;
                     int newId = 0;
@@ -103,12 +104,11 @@ public class  ShoppingListFragment extends Fragment {
                     }
 
                     if (!found) {
-                        int amount = Integer.parseInt(inputAmount.getText().toString());
                         shoppingListProductViewModel.insert(new ShoppingListProduct(typeName, amount, 1));
 
                     }
                     else {
-                        shoppingListProduct.setAmount(shoppingListProduct.getAmount() + 1);
+                        shoppingListProduct.setAmount(shoppingListProduct.getAmount() + amount);
                         shoppingListProductViewModel.update(shoppingListProduct);
                     }
                 } else {
