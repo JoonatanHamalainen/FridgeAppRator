@@ -1,32 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:textAlignment="center">
 
     <TextView
-        android:id="@+id/instructionsText"
+        android:id="@+id/instructions_main_shopping_list_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/instructions_main_shopping_list_text"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructions_main_header_shopping_list" />
+
+    <TextView
+        android:id="@+id/instructions_main_header_shopping_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instructionsText"
-        android:textAlignment="viewStart"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/instructions_main_header_shopping_list"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructionsHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/instructions_main_fridge_text" />
 
     <TextView
-        android:id="@+id/instructionsHeader"
-        android:layout_width="210dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="@string/instructionsHeader"
-        android:textSize="24sp"
+        android:id="@+id/instructions_main_fridge_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/instructions_main_fridge_text"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructions_main_header_fridge" />
+
+    <TextView
+        android:id="@+id/instructions_main_header_contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/instructions_main_header_contents"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instructions_main_header_fridge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/instructions_main_header_fridge"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructions_main_header_contents" />
 </androidx.constraintlayout.widget.ConstraintLayout>

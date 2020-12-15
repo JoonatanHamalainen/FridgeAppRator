@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">FridgeAppRator</string>
+    <string name="welcome_text">Aloita FridgeAppRatorin käyttö klikkaamalla jotain alla olevista vaihtoehdoista!</string>
     <string name="shoppingList">Ostoslista</string>
     <string name="fridge">Jääkaappi</string>
     <string name="addProduct">Anna Lisättävä Tuote</string>
@@ -17,4 +18,7 @@
     <string name="buttonSkipAppProductPopUp">Ohita</string>
     <string name="buttonAddProductPopUp">Lisää</string>
     <string name="instructionsHeader">Ohjeet</string>
+    <string name="instructions_main_header_contents">Sisällöt:</string>
+    <string name="instructions_main_header_fridge"><a href="">1. Jääkaappi</a></string>
+    <string name="instructions_main_header_shopping_list"><a href="">2. Ostoslista</a></string>
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instructionShoppingListAdd">
+        <b>1. Tuotteen lisääminen ostoslistaan</b>
+        \nOstoslistaan voi lisätä tuotteen kirjoittamalla yläreunan kenttiin tuoteen nimen ja määrän,
+        jonka verran tuotetta halutaan ostaa. Lopuksi painetaan vihreää plus-painiketta, jonka
+        jälkeen tuote ilmestyy ostoslistaan. Jos ostoslista sisältää jo annetun tuotteen, lisätään sen
+        vanhaan määrään vain uusi määrä.
+    </string>
+    <string name="instructionShoppingListRemove">
+        <b>2. Tuotteen poistaminen ostoslistasta</b>
+        \nOstoslistalta voi poistaa tuotteita painamalla tuotetta, joka halutaan poistaa ja
+        pitämällä pohjassa.
+    </string>
+    <string name="instructionShoppingListMark">
+        <b>3. Tuotteiden merkkaaminen</b>
+        \nOstoslistan tuotteita voi merkitä painamalla lisättyä tuotetta kerran. Merkintä poistuu kun tuotetta
+        painetaan uudelleen.
+    </string>
+    <string name="instructionShoppingListExport">
+        <b>4. Valmiin ostoslistan vieminen Jääkaappiin</b>
+        \nOstoslistan voi kokonaisuudessaan viedä jääkaappiin painamalla VIE TUOTTEET -painiketta.
+        Tämän jälkeen ruudulle aukeaa jokaista tuotetta varten yksitellen lomake, jossa pyydetään
+        syöttämään tuotteen viimeinen käyttöpäivä. Jokaisen tuotteen kohdalla voi painaa myös
+        Ohita-painiketta, jolloin kyseistä tuotetta ei viedä jääkaappiin. Kun viimeinen käyttöpäivä
+        on syötettynä voi tuotteen viedä jääkaappiin painamalla Lisää Tuote -painiketta. Jos
+        jääkaapissa on jo kyseistä tuotetta kasvatetaan sen määrää jääkaapissa yhdellä. Muuten
+        luodaan jääkaappiin uusi tuotetyyppi.
+    </string>
+</resources>

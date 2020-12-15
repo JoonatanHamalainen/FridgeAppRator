@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instructions_main_fridge_text">
+        • Yksittäisen tuotteen lisääminen
+        \n• Tuotteiden viimeisen käyttöpäivän näyttäminen
+        \n• Yksittäisen tuotteen poistaminen
+        \n• Tuotetyypin poistaminen
+    </string>
+    <string name="instructions_main_shopping_list_text">
+        • Tuotteen lisääminen ostoslistaan
+        \n• Tuotteen poistaminen ostoslistasta
+        \n• Tuotteiden merkkaaminen
+        \n• Valmiin ostoslistan vieminen Jääkaappiin
+    </string>
+</resources>
