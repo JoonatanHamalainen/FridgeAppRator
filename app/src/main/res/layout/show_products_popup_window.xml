@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FDFDFD"
     tools:context=".fragment.FridgeProductListFragment">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/showProductsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#EB292A2B"
         tools:listitem="@layout/recyclerview_product_item" />
 
 </FrameLayout>

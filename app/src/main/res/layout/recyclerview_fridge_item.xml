@@ -8,11 +8,13 @@
         android:id="@+id/productTypeName"
         style="@style/fridge_product_name"
         android:layout_width="match_parent"
-        android:background="@android:color/white"/>
+        android:background="#4C5057"
+        android:textColor="#020202" />
 
     <TextView
         android:id="@+id/productTypeAmount"
         style="@style/fridge_product_amount"
         android:layout_width="match_parent"
-        android:background="@android:color/white"/>
+        android:background="#4C5057"
+        android:textColor="#000000" />
 </LinearLayout>
