@@ -1,11 +1,13 @@
 package com.example.fridgeapprator.fragment;
 
+import android.app.DatePickerDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -28,9 +30,28 @@ import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.example.fridgeapprator.viewModel.ProductViewModel;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class PopUpWindowController {
+
+    final Calendar myCalendar = Calendar.getInstance();
+    EditText editText = null;
+
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear + 1);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            String calendarString = myCalendar.get(Calendar.YEAR) + "-" + myCalendar.get(Calendar.MONTH) + "-" + myCalendar.get(Calendar.DATE);
+            editText.setText(calendarString);
+        }
+
+    };
 
     public void showProductTypeProductsPopUp(View view, ViewGroup container, int position, LayoutInflater inflater,
                                              FragmentActivity activity, LifecycleOwner owner) {
@@ -113,7 +134,7 @@ public class PopUpWindowController {
         ImageButton cancelButton = popupView.findViewById(R.id.buttonCancel);
         Button addNewProductButton = popupView.findViewById(R.id.buttonAddNewProduct);
         EditText newProductTypeName = popupView.findViewById(R.id.inputNewProductTypeName);
-        EditText expirationDate = popupView.findViewById(R.id.inputNewProductExpirationDate);
+        editText = popupView.findViewById(R.id.inputNewProductExpirationDate);
 
 
         // create the popup window
@@ -134,12 +155,24 @@ public class PopUpWindowController {
             }
         });
 
+
+        editText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(inflater.getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
         addNewProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!newProductTypeName.getText().toString().equals("") && !expirationDate.getText().toString().equals("")) {
+                if (!newProductTypeName.getText().toString().equals("") && !editText.getText().toString().equals("")) {
                     String newProductTypeNameValue = newProductTypeName.getText().toString();
-                    Date expirationDateValue =  Date.valueOf(expirationDate.getText().toString());
+                    Date expirationDateValue =  Date.valueOf(editText.getText().toString());
                     List<ProductTypeWithProducts> productTypes = productTypeViewModel.getAllProductTypes().getValue();
                     boolean found = false;
                     ProductType productType = null;
@@ -181,7 +214,7 @@ public class PopUpWindowController {
 
         Button add = popupView.findViewById(R.id.buttonAddProductPopUp);
         Button skip = popupView.findViewById(R.id.buttonSkipAddProductPopUp);
-        EditText editText = popupView.findViewById(R.id.inputExpirationDatePopUp);
+        editText = popupView.findViewById(R.id.inputExpirationDatePopUp);
         TextView textView = popupView.findViewById(R.id.textViewHeaderPopUpExpiration);
         textView.setText(typeName);
 
@@ -198,6 +231,17 @@ public class PopUpWindowController {
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        editText.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(inflater.getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
 
         add.setOnClickListener(new View.OnClickListener() {
 
@@ -216,16 +260,16 @@ public class PopUpWindowController {
                         break;
                     }
                 }
-                Date expirationDateValue = Date.valueOf(editText.getText().toString());
+                Date expirationDate = Date.valueOf(editText.getText().toString());
                 if (!found) {
 
                     newId = (int) productTypeViewModel.insert(new ProductType(typeName, 1));
 
                     List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
-                    productViewModel.insert(new Product(newId, expirationDateValue));
+                    productViewModel.insert(new Product(newId, expirationDate));
                 } else {
                     productType.setAmount(productType.getAmount() + 1);
-                    productViewModel.insert(new Product(productType.getProductTypeID(), expirationDateValue));
+                    productViewModel.insert(new Product(productType.getProductTypeID(), expirationDate));
                     productTypeViewModel.update(productType);
 
                 }
