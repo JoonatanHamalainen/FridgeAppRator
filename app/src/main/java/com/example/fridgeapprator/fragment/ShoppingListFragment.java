@@ -33,7 +33,7 @@ public class  ShoppingListFragment extends Fragment {
     private OnItemTouchClickListener itemTouchListener;
     private PopUpWindowController popUpWindowController;
 
-    private EditText inputShoppingListName, inputNewProductName, inputAmount;
+    private EditText inputNewProductName, inputAmount;
     private ImageButton addButton;
     private Button importShoppingList;
 
@@ -75,7 +75,6 @@ public class  ShoppingListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.shopping_list_fragment, container, false);
         recyclerView = view.findViewById(R.id.recyclerViewShoppingList);
-        this.inputShoppingListName = view.findViewById(R.id.inputShoppingListName);
         this.inputNewProductName = view.findViewById(R.id.inputNewProductTypeName);
         this.inputAmount = view.findViewById(R.id.inputAmount);
         this.addButton = view.findViewById(R.id.buttonplus);
@@ -133,7 +132,6 @@ public class  ShoppingListFragment extends Fragment {
                                 shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getProductTypeName());
 
                     }
-
                 }
             }
         });
