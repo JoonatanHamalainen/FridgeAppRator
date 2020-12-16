@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:background="#4C5057">
+    android:background="@drawable/bordered_popups">
 
     <TextView
         android:id="@+id/addNewProductHeading"
@@ -16,6 +16,7 @@
         android:gravity="center"
         android:text="@string/popupTextAddNewProduct"
         android:textSize="22sp"
+        android:background="#4C5057"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
