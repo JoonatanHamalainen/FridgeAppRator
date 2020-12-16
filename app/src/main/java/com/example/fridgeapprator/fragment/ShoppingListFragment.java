@@ -111,6 +111,11 @@ public class  ShoppingListFragment extends Fragment {
                         shoppingListProduct.setAmount(shoppingListProduct.getAmount() + amount);
                         shoppingListProductViewModel.update(shoppingListProduct);
                     }
+                    inputNewProductName.getText().clear();
+                    inputAmount.setText("1");
+
+
+
                 } else {
                     Toast.makeText(getActivity(), "Tekstikenttä tyhjä tai määrä on alle 1", Toast.LENGTH_SHORT).show();
                 }

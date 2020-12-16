@@ -11,9 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
-        android:textColor="#DC000000"
-        android:textColorHint="#000000"
-        android:textColorLink="#050505"
         android:textSize="36sp" />
 
 </LinearLayout>

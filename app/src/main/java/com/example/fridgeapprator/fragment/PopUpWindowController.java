@@ -1,6 +1,7 @@
 package com.example.fridgeapprator.fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,6 +33,7 @@ import com.example.fridgeapprator.viewModel.ProductViewModel;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class PopUpWindowController {
 
@@ -43,15 +45,23 @@ public class PopUpWindowController {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
-            // TODO Auto-generated method stub
+
             myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear + 1);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            String calendarString = myCalendar.get(Calendar.YEAR) + "-" + myCalendar.get(Calendar.MONTH) + "-" + myCalendar.get(Calendar.DATE);
+            int month = myCalendar.get(Calendar.MONTH) + 1;
+            String calendarString = myCalendar.get(Calendar.YEAR) + "-" + month + "-" + myCalendar.get(Calendar.DATE);
             editText.setText(calendarString);
         }
 
     };
+
+    public void openDateDialog(Context context) {
+        new DatePickerDialog(context, date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
 
     public void showProductTypeProductsPopUp(View view, ViewGroup container, int position, LayoutInflater inflater,
                                              FragmentActivity activity, LifecycleOwner owner) {
@@ -120,8 +130,8 @@ public class PopUpWindowController {
         });
     }
 
-    public void insertSingleProductPopUp (View view, ViewGroup container, LayoutInflater inflater,
-                                          FragmentActivity activity, LifecycleOwner owner) {
+    public void insertSingleProductPopUp(View view, ViewGroup container, LayoutInflater inflater,
+                                         FragmentActivity activity, LifecycleOwner owner) {
 
         ProductTypeViewModel productTypeViewModel = new ViewModelProvider(activity).get(ProductTypeViewModel.class);
         ProductViewModel productViewModel = new ViewModelProvider(activity).get(ProductViewModel.class);
@@ -161,9 +171,7 @@ public class PopUpWindowController {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(inflater.getContext(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                openDateDialog(inflater.getContext());
             }
         });
 
@@ -172,35 +180,37 @@ public class PopUpWindowController {
             public void onClick(View view) {
                 if (!newProductTypeName.getText().toString().equals("") && !editText.getText().toString().equals("")) {
                     String newProductTypeNameValue = newProductTypeName.getText().toString();
-                    Date expirationDateValue =  Date.valueOf(editText.getText().toString());
+                    Date expirationDateValue = Date.valueOf(editText.getText().toString());
                     List<ProductTypeWithProducts> productTypes = productTypeViewModel.getAllProductTypes().getValue();
                     boolean found = false;
                     ProductType productType = null;
                     int newId = 0;
-                    for(int i = 0; i < productTypes.size(); i++) {
+                    for (int i = 0; i < productTypes.size(); i++) {
                         productType = productTypes.get(i).productType;
                         String name = productType.getProductTypeName();
 
-                        if(name.equals(newProductTypeNameValue)) {
+                        if (name.equals(newProductTypeNameValue)) {
                             found = true;
                             break;
                         }
                     }
                     if (!found) {
 
-                        newId = (int)productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
+                        newId = (int) productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
 
                         List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
                         productViewModel.insert(new Product(newId, expirationDateValue));
-                    }
-                    else {
+                    } else {
                         productType.setAmount(productType.getAmount() + 1);
                         productViewModel.insert(new Product(productType.getProductTypeID(), expirationDateValue));
                         productTypeViewModel.update(productType);
 
                     }
+                    popupWindow.dismiss();
+                } else {
+                    Toast.makeText(inflater.getContext(), "Puuttuva pvm tai nimi", Toast.LENGTH_SHORT).show();
                 }
-                popupWindow.dismiss();
+
             }
         });
     }
@@ -237,9 +247,7 @@ public class PopUpWindowController {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                new DatePickerDialog(inflater.getContext(), date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                openDateDialog(inflater.getContext());
             }
         });
 
@@ -247,34 +255,40 @@ public class PopUpWindowController {
 
             @Override
             public void onClick(View v) {
-                List<ProductTypeWithProducts> productTypes = productTypeViewModel.getAllProductTypes().getValue();
-                boolean found = false;
-                ProductType productType = null;
-                int newId = 0;
-                for (int i = 0; i < productTypes.size(); i++) {
-                    productType = productTypes.get(i).productType;
-                    String name = productType.getProductTypeName();
+                if (!editText.getText().toString().equals("")) {
+                    List<ProductTypeWithProducts> productTypes = productTypeViewModel.getAllProductTypes().getValue();
+                    boolean found = false;
+                    ProductType productType = null;
+                    int newId = 0;
+                    for (int i = 0; i < productTypes.size(); i++) {
+                        productType = productTypes.get(i).productType;
+                        String name = productType.getProductTypeName();
 
-                    if (name.equals(typeName)) {
-                        found = true;
-                        break;
+                        if (name.equals(typeName)) {
+                            found = true;
+                            break;
+                        }
                     }
-                }
-                Date expirationDate = Date.valueOf(editText.getText().toString());
-                if (!found) {
+                    //johki tähä
+                    Date expirationDate = Date.valueOf(editText.getText().toString());
+                    if (!found) {
 
-                    newId = (int) productTypeViewModel.insert(new ProductType(typeName, 1));
+                        newId = (int) productTypeViewModel.insert(new ProductType(typeName, 1));
 
-                    List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
-                    productViewModel.insert(new Product(newId, expirationDate));
+                        List<ProductTypeWithProducts> updatedProductTypes = productTypeViewModel.getAllProductTypes().getValue();
+                        productViewModel.insert(new Product(newId, expirationDate));
+                    } else {
+                        productType.setAmount(productType.getAmount() + 1);
+                        productViewModel.insert(new Product(productType.getProductTypeID(), expirationDate));
+                        productTypeViewModel.update(productType);
+
+                    }
+                    Toast.makeText(activity, "Tuote lisätty", Toast.LENGTH_SHORT).show();
+                    popupWindow.dismiss();
                 } else {
-                    productType.setAmount(productType.getAmount() + 1);
-                    productViewModel.insert(new Product(productType.getProductTypeID(), expirationDate));
-                    productTypeViewModel.update(productType);
-
+                    Toast.makeText(inflater.getContext(), "Puuttuva pvm", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(activity, "Tuote lisätty", Toast.LENGTH_SHORT).show();
-                popupWindow.dismiss();
+
 
             }
         });

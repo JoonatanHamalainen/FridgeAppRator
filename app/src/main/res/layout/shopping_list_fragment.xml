@@ -59,6 +59,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="90dp"
         app:layout_constraintStart_toEndOf="@+id/inputAmount"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
