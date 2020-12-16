@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,16 +21,14 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
 
     class ShoppingListViewHolder extends RecyclerView.ViewHolder {
-        private final EditText inputShoppingListName;
         private final EditText inputNewProductName;
         private final EditText inputAmount;
 
-        private final TextView shoppingListProductTypeName;
+        private final CheckedTextView shoppingListProductTypeName;
         private final TextView shoppingListProductTypeAmount;
 
         public ShoppingListViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.inputShoppingListName = itemView.findViewById(R.id.inputShoppingListName);
             this.inputNewProductName = itemView.findViewById(R.id.inputNewProductTypeName);
             this.inputAmount = itemView.findViewById(R.id.inputAmount);
             this.shoppingListProductTypeName = itemView.findViewById(R.id.productTypeName);
@@ -52,16 +51,42 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         return new ShoppingListViewHolder(itemView);
     }
 
+    private void checkItem(ShoppingListViewHolder holder) {
+        Boolean value = holder.shoppingListProductTypeName.isChecked();
+
+        if (value) {
+            // set check mark drawable and set checked property to false
+
+            holder.shoppingListProductTypeName.setCheckMarkDrawable(R.drawable.check_ic);
+            holder.shoppingListProductTypeName.setChecked(false);
+        } else {
+            // set check mark drawable and set checked property to true
+
+            holder.shoppingListProductTypeName.setCheckMarkDrawable(R.drawable.check);
+            holder.shoppingListProductTypeName.setChecked(true);
+        }
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ShoppingListViewHolder holder, int position) {
 
-        if (shoppingListWithItsProducts != null) {
-            ShoppingListWithShoppingListProducts current = shoppingListWithItsProducts;
-            holder.shoppingListProductTypeName.setText(current.shoppingListProducts.get(position).getProductTypeName());
-            holder.shoppingListProductTypeAmount.setText(Integer.toString(current.shoppingListProducts.get(position).getAmount()));
-        } else {
-            holder.shoppingListProductTypeName.setText(R.string.noProductsFound);
-        }
+        holder.shoppingListProductTypeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkItem(holder);
+            }
+        });
+
+        holder.shoppingListProductTypeAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkItem(holder);
+            }
+        });
+
+        ShoppingListWithShoppingListProducts current = shoppingListWithItsProducts;
+        holder.shoppingListProductTypeName.setText(current.shoppingListProducts.get(position).getProductTypeName());
+        holder.shoppingListProductTypeAmount.setText(Integer.toString(current.shoppingListProducts.get(position).getAmount()));
 
     }
 

@@ -4,10 +4,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <CheckedTextView
         android:id="@+id/productTypeName"
         style="@style/fridge_product_name"
         android:layout_width="match_parent"
+        android:checked="false"
         android:background="#4C5057"
         android:textColor="#020202" />
 
