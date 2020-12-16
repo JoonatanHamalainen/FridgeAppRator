@@ -46,8 +46,9 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/expirationDate"
-        android:inputType="date"
         android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNewProductTypeName" />
 
