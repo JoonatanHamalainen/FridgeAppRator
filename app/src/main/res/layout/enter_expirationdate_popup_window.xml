@@ -19,6 +19,8 @@
         android:hint="@string/expirationDate"
         android:inputType="date"
         android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +59,6 @@
         android:layout_marginTop="21dp"
         android:layout_marginEnd="142dp"
         android:textSize="18sp"
-        android:background="#4C5057"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"

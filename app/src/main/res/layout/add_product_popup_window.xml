@@ -16,7 +16,6 @@
         android:gravity="center"
         android:text="@string/popupTextAddNewProduct"
         android:textSize="22sp"
-        android:background="#4C5057"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,8 +45,9 @@
         android:ems="10"
         android:gravity="center"
         android:hint="@string/expirationDate"
-        android:inputType="date"
         android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNewProductTypeName" />
 
@@ -76,6 +76,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
+        android:background="?android:attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/btn_dialog" />
