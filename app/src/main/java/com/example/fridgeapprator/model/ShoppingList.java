@@ -9,7 +9,7 @@ public class ShoppingList {
     @PrimaryKey(autoGenerate = true)
     private int shoppingListID;
     @NonNull
-    private String shoppingListName;
+    private final String shoppingListName;
 
     public ShoppingList(@NonNull String shoppingListName) {
         this.shoppingListName = shoppingListName;
@@ -28,7 +28,4 @@ public class ShoppingList {
         return shoppingListName;
     }
 
-    public void setShoppingListName(@NonNull String shoppingListName) {
-        this.shoppingListName = shoppingListName;
-    }
 }

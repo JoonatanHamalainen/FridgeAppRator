@@ -13,8 +13,8 @@ import com.example.fridgeapprator.model.ShoppingListWithShoppingListProducts;
 import java.util.List;
 
 public class ShoppingListRepository {
-    private ShoppingListDao shoppingListDao;
-    private LiveData<List<ShoppingListWithShoppingListProducts>> allShoppingListProducts;
+    private final ShoppingListDao shoppingListDao;
+    private final LiveData<List<ShoppingListWithShoppingListProducts>> allShoppingListProducts;
 
     public ShoppingListRepository(Application application) {
         IHSDatabase db = IHSDatabase.getDatabase(application);
@@ -22,6 +22,8 @@ public class ShoppingListRepository {
         allShoppingListProducts = shoppingListDao.getShoppingListsWithShoppingListProducts();
     }
 
+    //not in use! will be in use when multiple shoppinglists are implemented
+    @SuppressWarnings("unused")
     public LiveData<List<ShoppingListWithShoppingListProducts>> getAllShoppingListProducts() {
         return allShoppingListProducts;
     }
@@ -31,18 +33,18 @@ public class ShoppingListRepository {
         return shoppingListDao.getShoppingListWithItsProducts(shoppingListID);
     }
 
-
+    @SuppressWarnings("deprecation")
     public void insert(ShoppingList shoppingList) {
         new insertAsyncTask(shoppingListDao).execute(shoppingList);
     }
-
+    @SuppressWarnings("deprecation")
     public void delete (ShoppingList shoppingList) {
         new deleteAsyncTask(shoppingListDao).execute(shoppingList);
     }
-
+    @SuppressWarnings("deprecation")
     private static class insertAsyncTask extends AsyncTask<ShoppingList, Void, Void> {
 
-        private ShoppingListDao shoppingListAsyncTaskDao;
+        private final ShoppingListDao shoppingListAsyncTaskDao;
 
         insertAsyncTask(ShoppingListDao dao) {
             shoppingListAsyncTaskDao = dao;
@@ -55,10 +57,10 @@ public class ShoppingListRepository {
             return null;
         }
     }
-
+    @SuppressWarnings("deprecation")
     private static class deleteAsyncTask extends AsyncTask<ShoppingList, Void, Void> {
 
-        private ShoppingListDao shoppingListAsyncTaskDao;
+        private final ShoppingListDao shoppingListAsyncTaskDao;
 
         deleteAsyncTask(ShoppingListDao dao) {
             shoppingListAsyncTaskDao = dao;

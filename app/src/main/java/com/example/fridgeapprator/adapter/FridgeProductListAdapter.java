@@ -1,5 +1,6 @@
 package com.example.fridgeapprator.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProductListAdapter.FridgeProductViewHolder> {
 
-    class FridgeProductViewHolder extends RecyclerView.ViewHolder {
+    static class FridgeProductViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView fridgeProductTypeName;
         private final TextView fridgeProductTypeAmount;
@@ -43,6 +44,7 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
         return new FridgeProductViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull FridgeProductViewHolder holder, int position) {
         if (productTypes != null) {
@@ -50,21 +52,10 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
             holder.fridgeProductTypeName.setText(current.productType.getProductTypeName());
             holder.fridgeProductTypeAmount.setText(Integer.toString(current.productType.getAmount()));
         } else {
-            // Covers the case of data not being ready yet.
             holder.fridgeProductTypeName.setText(R.string.noProductsFound);
         }
     }
 
-    public String getName(View itemView) {
-        return ((TextView) itemView.findViewById(R.id.productTypeName)).getText().toString();
-    }
-
-    public int getAmount(View itemView) {
-        return Integer.parseInt(
-                ((TextView) itemView.findViewById(R.id.productTypeAmount))
-                        .getText().toString()
-        );
-    }
 
     public void setProductTypes(List<ProductTypeWithProducts> productTypes){
         this.productTypes = productTypes;

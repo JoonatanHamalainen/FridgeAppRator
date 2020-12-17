@@ -29,8 +29,5 @@ public interface ProductTypeDao {
     @Query("SELECT * FROM producttype")
     LiveData<List<ProductTypeWithProducts>> getProductTypesWithProducts();
 
-    @Transaction
-    @Query("SELECT * FROM producttype where productTypeID = :productTypeID")
-    LiveData<ProductTypeWithProducts> getProductTypeWithProducts(int productTypeID);
 
 }

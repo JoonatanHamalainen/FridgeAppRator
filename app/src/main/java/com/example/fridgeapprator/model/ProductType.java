@@ -11,7 +11,7 @@ public class ProductType {
     @PrimaryKey(autoGenerate = true)
     private int productTypeID;
     @NonNull
-    private String productTypeName;
+    private final String productTypeName;
 
     private int amount;
 
@@ -31,10 +31,6 @@ public class ProductType {
     @NonNull
     public String getProductTypeName() {
         return productTypeName;
-    }
-
-    public void setProductTypeName(@NonNull String productTypeName) {
-        this.productTypeName = productTypeName;
     }
 
     public int getAmount() {

@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ProductTypeRepository {
-    private ProductTypeDao productTypeDao;
-    private LiveData<List<ProductTypeWithProducts>> allProductTypes;
+    private final ProductTypeDao productTypeDao;
+    private final LiveData<List<ProductTypeWithProducts>> allProductTypes;
 
     public ProductTypeRepository(Application application) {
         IHSDatabase db = IHSDatabase.getDatabase(application);
@@ -27,11 +27,8 @@ public class ProductTypeRepository {
         return allProductTypes;
     }
 
-    public LiveData<ProductTypeWithProducts> getProductTypeWithProducts(int productTypeID) {
-        return productTypeDao.getProductTypeWithProducts(productTypeID);
-    }
 
-
+    @SuppressWarnings("deprecation")
     public long insert(ProductType productType) {
         try {
             return new insertAsyncTask(productTypeDao).execute(productType).get();
@@ -41,16 +38,19 @@ public class ProductTypeRepository {
 
     }
 
+    @SuppressWarnings("deprecation")
     public void delete(ProductType productType) {
         new deleteAsyncTask(productTypeDao).execute(productType);
     }
+    @SuppressWarnings("deprecation")
     public void update(ProductType productType) {
         new updateAsyncTask(productTypeDao).execute(productType);
     }
 
 
+    @SuppressWarnings("deprecation")
     private static class insertAsyncTask extends AsyncTask<ProductType, Long, Long> {
-        private ProductTypeDao productTypeAsyncTaskDao;
+        private final ProductTypeDao productTypeAsyncTaskDao;
         insertAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
@@ -62,8 +62,9 @@ public class ProductTypeRepository {
 
     }
 
+    @SuppressWarnings("deprecation")
     private static class updateAsyncTask extends AsyncTask<ProductType, Void, Void> {
-        private ProductTypeDao productTypeAsyncTaskDao;
+        private final ProductTypeDao productTypeAsyncTaskDao;
         updateAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
@@ -76,8 +77,9 @@ public class ProductTypeRepository {
     }
 
 
+    @SuppressWarnings("deprecation")
     private static class deleteAsyncTask extends AsyncTask<ProductType, Void, Void> {
-        private ProductTypeDao productTypeAsyncTaskDao;
+        private final ProductTypeDao productTypeAsyncTaskDao;
         deleteAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }

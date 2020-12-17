@@ -10,37 +10,30 @@ import com.example.fridgeapprator.database.IHSDatabase;
 import com.example.fridgeapprator.model.Product;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+
 
 public class ProductRepository {
-    private ProductDao productDao;
-    private LiveData<List<Product>> allProducts;
+    private final ProductDao productDao;
 
     public ProductRepository(Application application) {
         IHSDatabase db = IHSDatabase.getDatabase(application);
         productDao = db.productDao();
-        allProducts = productDao.getAllProducts();
     }
 
-    public LiveData<List<Product>> getAllProducts() {
-        return allProducts;
-    }
 
-    public LiveData<Product> getProductById(int id) {
-        return productDao.getProduct(id);
-    }
-
+    @SuppressWarnings("deprecation")
     public void insert(Product product) {
         new insertAsyncTask(productDao).execute(product);
     }
-
+    @SuppressWarnings("deprecation")
     public void delete (Product product) {
         new deleteAsyncTask(productDao).execute(product);
     }
 
+    @SuppressWarnings("deprecation")
     private static class deleteAsyncTask extends AsyncTask<Product, Void, Void> {
 
-        private ProductDao productAsyncTaskDao;
+        private final ProductDao productAsyncTaskDao;
 
         deleteAsyncTask(ProductDao dao) {
             productAsyncTaskDao = dao;
@@ -53,9 +46,10 @@ public class ProductRepository {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static class insertAsyncTask extends AsyncTask<Product, Void, Void> {
 
-        private ProductDao productAsyncTaskDao;
+        private final ProductDao productAsyncTaskDao;
 
         insertAsyncTask(ProductDao dao) {
             productAsyncTaskDao = dao;

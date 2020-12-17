@@ -1,6 +1,7 @@
 package com.example.fridgeapprator.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -10,9 +11,11 @@ public class ShoppingListProduct {
     @PrimaryKey(autoGenerate = true)
     private int shoppingListProductID;
     @NonNull
-    private String productTypeName;
+    private final String productTypeName;
 
-    private int amount, shoppingListID;
+    private int amount;
+    @ColumnInfo(index = true)
+    private final int shoppingListID;
 
     public ShoppingListProduct(@NonNull String productTypeName, int amount, int shoppingListID) {
         this.productTypeName = productTypeName;
@@ -33,9 +36,6 @@ public class ShoppingListProduct {
         return productTypeName;
     }
 
-    public void setProductTypeName(@NonNull String productTypeName) {
-        this.productTypeName = productTypeName;
-    }
 
     public int getAmount() {
         return amount;
@@ -49,7 +49,5 @@ public class ShoppingListProduct {
         return shoppingListID;
     }
 
-    public void setShoppingListID(int shoppingListID) {
-        this.shoppingListID = shoppingListID;
-    }
+
 }

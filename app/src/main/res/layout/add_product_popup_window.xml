@@ -25,41 +25,42 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/back"
         android:gravity="center"
         android:hint="@string/addProduct"
+        android:inputType="text"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewProductHeading" />
+        app:layout_constraintTop_toBottomOf="@+id/addNewProductHeading"
+        android:autofillHints="tuotetyyppi" />
 
     <EditText
         android:id="@+id/inputNewProductExpirationDate"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/back"
+        android:clickable="true"
         android:ems="10"
+        android:focusable="false"
         android:gravity="center"
         android:hint="@string/expirationDate"
+        android:inputType="date"
         android:textSize="18sp"
-        android:clickable="true"
-        android:focusable="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputNewProductTypeName" />
+        app:layout_constraintTop_toBottomOf="@+id/inputNewProductTypeName"
+        tools:ignore="KeyboardInaccessibleWidget"
+        android:autofillHints="päiväys" />
 
     <Button
         android:id="@+id/buttonAddNewProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="50dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:text="@string/button_addProduct"
         android:textSize="18sp"
@@ -75,10 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:srcCompat="@android:drawable/btn_dialog"
+        android:contentDescription="@string/todo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
