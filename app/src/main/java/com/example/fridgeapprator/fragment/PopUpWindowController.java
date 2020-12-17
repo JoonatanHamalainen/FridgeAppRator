@@ -37,19 +37,17 @@ import java.util.List;
 public class PopUpWindowController {
 
     final Calendar myCalendar = Calendar.getInstance();
-    EditText editText = null;
 
-    DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+    public void openDateDialog(Context context, EditText editText) {
+        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
 
-        myCalendar.set(Calendar.YEAR, year);
-        myCalendar.set(Calendar.MONTH, monthOfYear);
-        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        int month = myCalendar.get(Calendar.MONTH) + 1;
-        String calendarString = myCalendar.get(Calendar.YEAR) + "-" + month + "-" + myCalendar.get(Calendar.DATE);
-        editText.setText(calendarString);
-    };
-
-    public void openDateDialog(Context context) {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            int month = myCalendar.get(Calendar.MONTH) + 1;
+            String calendarString = myCalendar.get(Calendar.YEAR) + "-" + month + "-" + myCalendar.get(Calendar.DATE);
+            editText.setText(calendarString);
+        };
         new DatePickerDialog(context, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -121,7 +119,7 @@ public class PopUpWindowController {
         ImageButton cancelButton = popupView.findViewById(R.id.buttonCancel);
         Button addNewProductButton = popupView.findViewById(R.id.buttonAddNewProduct);
         EditText newProductTypeName = popupView.findViewById(R.id.inputNewProductTypeName);
-        editText = popupView.findViewById(R.id.inputNewProductExpirationDate);
+        EditText editText = popupView.findViewById(R.id.inputNewProductExpirationDate);
 
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -133,7 +131,7 @@ public class PopUpWindowController {
         cancelButton.setOnClickListener(view1 -> popupWindow.dismiss());
 
 
-        editText.setOnClickListener(v -> openDateDialog(inflater.getContext()));
+        editText.setOnClickListener(v -> openDateDialog(inflater.getContext(), editText));
 
         addNewProductButton.setOnClickListener(view12 -> {
             if (!newProductTypeName.getText().toString().equals("") && !editText.getText().toString().equals("")) {
@@ -180,7 +178,7 @@ public class PopUpWindowController {
 
         Button add = popupView.findViewById(R.id.buttonAddProductPopUp);
         Button skip = popupView.findViewById(R.id.buttonSkipAddProductPopUp);
-        editText = popupView.findViewById(R.id.inputExpirationDatePopUp);
+        EditText editText = popupView.findViewById(R.id.inputExpirationDatePopUp);
         TextView textView = popupView.findViewById(R.id.textViewHeaderPopUpExpiration);
         textView.setText(typeName);
 
@@ -194,7 +192,7 @@ public class PopUpWindowController {
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-        editText.setOnClickListener(v -> openDateDialog(inflater.getContext()));
+        editText.setOnClickListener(v -> openDateDialog(inflater.getContext(), editText));
 
         add.setOnClickListener(v -> {
             if (!editText.getText().toString().equals("")) {
