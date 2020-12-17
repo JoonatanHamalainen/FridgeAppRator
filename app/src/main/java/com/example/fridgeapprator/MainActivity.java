@@ -55,8 +55,7 @@ public class MainActivity extends AppCompatActivity {
          */
 
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
-        shoppingListViewModel.insert(new ShoppingList("Ostoslista"));
-
+        //shoppingListViewModel.insert(new ShoppingList("Ostoslista"));
 
         if (findViewById(R.id.fragment_container) != null) {
 
