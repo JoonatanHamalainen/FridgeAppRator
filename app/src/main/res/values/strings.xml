@@ -17,8 +17,11 @@
     <string name="importShoppingList">Vie Tuotteet</string>
     <string name="buttonSkipAppProductPopUp">Ohita</string>
     <string name="buttonAddProductPopUp">Lisää</string>
+    <string name="addNewShoppinglistProductToast">Tekstikenttä tyhjä tai määrä on alle 1</string>
     <string name="instructionsHeader">Ohjeet</string>
+    <string name="notificationTitle">Joko vanhetunteita tai vanhenevia tuotteita</string>
     <string name="instructions_main_header_contents">Sisällöt:</string>
     <string name="instructions_main_header_fridge"><a href="">1. Jääkaappi</a></string>
     <string name="instructions_main_header_shopping_list"><a href="">2. Ostoslista</a></string>
+    <string name="todo">TODO</string>
 </resources>

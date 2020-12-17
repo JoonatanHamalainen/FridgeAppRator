@@ -20,7 +20,7 @@ import com.example.fridgeapprator.model.ShoppingList;
 import com.example.fridgeapprator.model.ShoppingListProduct;
 
 @TypeConverters({Converters.class})
-@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 46, exportSchema = false)
+@Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 49, exportSchema = false)
 public abstract class IHSDatabase extends RoomDatabase {
 
     public abstract ProductDao productDao();
@@ -47,28 +47,35 @@ public abstract class IHSDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback =
+    private static final RoomDatabase.Callback sRoomDatabaseCallback =
             new RoomDatabase.Callback(){
-
                 @Override
                 public void onOpen (@NonNull SupportSQLiteDatabase db){
                     super.onOpen(db);
+                }
+
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                    super.onCreate(db);
                     new PopulateDbAsync(INSTANCE).execute();
                 }
+
             };
 
 
+    @SuppressWarnings("deprecation")
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final ProductDao mDao;
+        private final ShoppingListDao mDao;
 
         PopulateDbAsync(IHSDatabase db) {
-            mDao = db.productDao();
+            mDao = db.shoppingListDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
-
+            mDao.insert(new ShoppingList("Ostoslista"));
 
             return null;
         }

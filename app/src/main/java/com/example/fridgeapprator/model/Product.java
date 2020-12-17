@@ -1,6 +1,7 @@
 package com.example.fridgeapprator.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -13,12 +14,13 @@ public class Product {
     @PrimaryKey(autoGenerate = true)
     private int productID;
     @NonNull
-    private Date expirationDate;
+    private final Date expirationDate;
 
-    private int productTypeID;
+    @ColumnInfo(index = true)
+    private final int productTypeID;
 
 
-    public Product(int productTypeID, Date expirationDate) {
+    public Product(int productTypeID, @NonNull Date expirationDate) {
         this.productTypeID = productTypeID;
         this.expirationDate = expirationDate;
     }
@@ -35,16 +37,9 @@ public class Product {
         return productTypeID;
     }
 
-    public void setProductTypeID(int productTypeID) {
-        this.productTypeID = productTypeID;
-    }
-
     @NonNull
     public Date getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(@NonNull Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
 }

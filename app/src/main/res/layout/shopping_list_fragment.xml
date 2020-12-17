@@ -50,7 +50,8 @@
         android:text="@string/defaultAmount"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/inputNewProductTypeName"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="LabelFor" />
 
     <ImageButton
         android:id="@+id/buttonplus"
@@ -61,7 +62,8 @@
         app:layout_constraintStart_toEndOf="@+id/inputAmount"
         android:background="?android:attr/selectableItemBackground"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        android:contentDescription="@string/todo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewShoppingList"

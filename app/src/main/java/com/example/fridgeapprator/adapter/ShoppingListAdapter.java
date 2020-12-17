@@ -1,11 +1,11 @@
 package com.example.fridgeapprator.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckedTextView;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,17 +20,14 @@ import java.util.Collections;
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> {
 
 
-    class ShoppingListViewHolder extends RecyclerView.ViewHolder {
-        private final EditText inputNewProductName;
-        private final EditText inputAmount;
+    static class ShoppingListViewHolder extends RecyclerView.ViewHolder {
+
 
         private final CheckedTextView shoppingListProductTypeName;
         private final TextView shoppingListProductTypeAmount;
 
         public ShoppingListViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.inputNewProductName = itemView.findViewById(R.id.inputNewProductTypeName);
-            this.inputAmount = itemView.findViewById(R.id.inputAmount);
             this.shoppingListProductTypeName = itemView.findViewById(R.id.productTypeName);
             this.shoppingListProductTypeAmount = itemView.findViewById(R.id.productTypeAmount);
 
@@ -52,37 +49,26 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
     }
 
     private void checkItem(ShoppingListViewHolder holder) {
-        Boolean value = holder.shoppingListProductTypeName.isChecked();
+        boolean value = holder.shoppingListProductTypeName.isChecked();
 
         if (value) {
-            // set check mark drawable and set checked property to false
 
             holder.shoppingListProductTypeName.setCheckMarkDrawable(R.drawable.check_ic);
             holder.shoppingListProductTypeName.setChecked(false);
         } else {
-            // set check mark drawable and set checked property to true
 
             holder.shoppingListProductTypeName.setCheckMarkDrawable(R.drawable.check);
             holder.shoppingListProductTypeName.setChecked(true);
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ShoppingListViewHolder holder, int position) {
 
-        holder.shoppingListProductTypeName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkItem(holder);
-            }
-        });
+        holder.shoppingListProductTypeName.setOnClickListener(view -> checkItem(holder));
 
-        holder.shoppingListProductTypeAmount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkItem(holder);
-            }
-        });
+        holder.shoppingListProductTypeAmount.setOnClickListener(view -> checkItem(holder));
 
         ShoppingListWithShoppingListProducts current = shoppingListWithItsProducts;
         holder.shoppingListProductTypeName.setText(current.shoppingListProducts.get(position).getProductTypeName());

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+    static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView productExpirationDate;
 
@@ -55,7 +55,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         notifyDataSetChanged();
     }
 
-    //tää size pitää ehkä olla products.size
     @Override
     public int getItemCount() {
         if (products != null)
