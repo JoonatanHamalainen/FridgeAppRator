@@ -26,14 +26,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="tuotetyyppi"
         android:background="@drawable/back"
         android:gravity="center"
         android:hint="@string/addProduct"
         android:inputType="text"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addNewProductHeading"
-        android:autofillHints="tuotetyyppi" />
+        app:layout_constraintTop_toBottomOf="@+id/addNewProductHeading" />
 
     <EditText
         android:id="@+id/inputNewProductExpirationDate"
@@ -41,6 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:autofillHints="päiväys"
         android:background="@drawable/back"
         android:clickable="true"
         android:ems="10"
@@ -49,10 +53,10 @@
         android:hint="@string/expirationDate"
         android:inputType="date"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputNewProductTypeName"
-        tools:ignore="KeyboardInaccessibleWidget"
-        android:autofillHints="päiväys" />
+        tools:ignore="KeyboardInaccessibleWidget" />
 
     <Button
         android:id="@+id/buttonAddNewProduct"

@@ -18,6 +18,8 @@ import com.example.fridgeapprator.adapter.ProductListAdapter;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Objects;
+
 public class FridgeProductListFragment extends Fragment {
 
     RecyclerView fridgeRecyclerView;
@@ -38,7 +40,7 @@ public class FridgeProductListFragment extends Fragment {
         fridgeProductListAdapter = new FridgeProductListAdapter(inflater.getContext());
         productListAdapter = new ProductListAdapter(inflater.getContext());
         popUpWindowController = new PopUpWindowController();
-        productTypeViewModel =  new ViewModelProvider(getActivity()).get(ProductTypeViewModel.class);
+        productTypeViewModel =  new ViewModelProvider(Objects.requireNonNull(getActivity())).get(ProductTypeViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> fridgeProductListAdapter.setProductTypes(productTypes));
 
         View view = inflater.inflate(R.layout.fridge_item_list_fragment, container, false);
@@ -57,7 +59,7 @@ public class FridgeProductListFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                if (productTypeViewModel.getAllProductTypes().getValue().get(position).productType.getAmount() < 1) {
+                if (Objects.requireNonNull(productTypeViewModel.getAllProductTypes().getValue()).get(position).productType.getAmount() < 1) {
                     productTypeViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(position).productType);
                 }
             }
