@@ -3,13 +3,9 @@ package com.example.fridgeapprator.repository;
 import android.app.Application;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.fridgeapprator.dao.ProductDao;
 import com.example.fridgeapprator.database.IHSDatabase;
 import com.example.fridgeapprator.model.Product;
-
-import java.util.List;
 
 
 public class ProductRepository {
@@ -25,8 +21,9 @@ public class ProductRepository {
     public void insert(Product product) {
         new insertAsyncTask(productDao).execute(product);
     }
+
     @SuppressWarnings("deprecation")
-    public void delete (Product product) {
+    public void delete(Product product) {
         new deleteAsyncTask(productDao).execute(product);
     }
 
@@ -61,7 +58,6 @@ public class ProductRepository {
             return null;
         }
     }
-
 
 
 }

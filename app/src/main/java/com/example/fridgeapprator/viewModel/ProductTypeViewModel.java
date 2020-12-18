@@ -28,17 +28,17 @@ public class ProductTypeViewModel extends AndroidViewModel {
     }
 
 
-    public long insert(ProductType productType)  {
+    public long insert(ProductType productType) {
         return productTypeRepository.insert(productType);
     }
+
     public void delete(ProductType productType) {
         productTypeRepository.delete(productType);
     }
+
     public void update(ProductType productType) {
         productTypeRepository.update(productType);
     }
-
-
 
 
 }

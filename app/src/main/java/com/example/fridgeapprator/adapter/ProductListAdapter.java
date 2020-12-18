@@ -16,20 +16,10 @@ import java.util.List;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductViewHolder> {
 
-    static class ProductViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView productExpirationDate;
-
-        private ProductViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.productExpirationDate = itemView.findViewById(R.id.productExpirationDate);
-        }
-    }
-
     private final LayoutInflater inflater;
     private List<Product> products = null;
 
-     public ProductListAdapter(Context context) {
+    public ProductListAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -43,14 +33,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
 
-         if (products != null) {
+        if (products != null) {
             Product current = products.get(position);
             holder.productExpirationDate.setText(current.getExpirationDate().toString());
-         }
+        }
 
     }
 
-    public void setProducts(List<Product> products){
+    public void setProducts(List<Product> products) {
         this.products = products;
         notifyDataSetChanged();
     }
@@ -60,6 +50,16 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         if (products != null)
             return products.size();
         else return 0;
+    }
+
+    static class ProductViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView productExpirationDate;
+
+        private ProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.productExpirationDate = itemView.findViewById(R.id.productExpirationDate);
+        }
     }
 
 }

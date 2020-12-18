@@ -10,9 +10,10 @@ import com.example.fridgeapprator.model.Product;
 public interface ProductDao {
 
     @Insert
-    void insert (Product product);
+    void insert(Product product);
+
     @Delete
-    void delete (Product product);
+    void delete(Product product);
 
 
 }

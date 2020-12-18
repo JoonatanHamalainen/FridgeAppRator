@@ -8,8 +8,6 @@ import com.example.fridgeapprator.model.Product;
 import com.example.fridgeapprator.repository.ProductRepository;
 
 
-
-
 public class ProductViewModel extends AndroidViewModel {
 
     private final ProductRepository productRepository;
@@ -20,7 +18,9 @@ public class ProductViewModel extends AndroidViewModel {
     }
 
 
-    public void delete(Product product) {productRepository.delete(product);}
+    public void delete(Product product) {
+        productRepository.delete(product);
+    }
 
 
     public void insert(Product product) {

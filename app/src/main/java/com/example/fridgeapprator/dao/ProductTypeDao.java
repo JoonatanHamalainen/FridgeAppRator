@@ -20,10 +20,10 @@ public interface ProductTypeDao {
     long insert(ProductType productType);
 
     @Update
-    void update (ProductType productType);
+    void update(ProductType productType);
 
     @Delete
-    void delete (ProductType productType);
+    void delete(ProductType productType);
 
     @Transaction
     @Query("SELECT * FROM producttype")

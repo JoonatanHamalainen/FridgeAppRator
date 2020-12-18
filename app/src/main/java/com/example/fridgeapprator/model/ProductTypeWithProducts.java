@@ -9,9 +9,9 @@ public class ProductTypeWithProducts {
     @Embedded
     public ProductType productType;
 
-    @Relation (
-        parentColumn = "productTypeID",
-        entityColumn = "productTypeID"
+    @Relation(
+            parentColumn = "productTypeID",
+            entityColumn = "productTypeID"
     )
 
     public List<Product> products;

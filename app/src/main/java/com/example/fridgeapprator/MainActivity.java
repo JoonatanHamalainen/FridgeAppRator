@@ -1,13 +1,13 @@
 package com.example.fridgeapprator;
 
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.fridgeapprator.fragment.FridgeProductListFragment;
 import com.example.fridgeapprator.fragment.InstructionsFragment;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         shoppingListViewModel = new ViewModelProvider(this).get(ShoppingListViewModel.class);
@@ -65,16 +65,14 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.fragment_container, shoppingListFragment)
                     .commit();
             return true;
-        }
-        else if (id == R.id.menu_fridge) {
+        } else if (id == R.id.menu_fridge) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             FridgeProductListFragment fridgeProductListFragment = new FridgeProductListFragment();
             transaction.addToBackStack(null);
             transaction.replace(R.id.fragment_container, fridgeProductListFragment)
                     .commit();
             return true;
-        }
-        else if (id == R.id.menu_instructions) {
+        } else if (id == R.id.menu_instructions) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             InstructionsFragment instructionsFragment = new InstructionsFragment();
             transaction.addToBackStack(null);

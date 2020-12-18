@@ -1,11 +1,5 @@
 package com.example.fridgeapprator.fragment;
 
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -18,6 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.fridgeapprator.R;
 import com.example.fridgeapprator.model.ProductTypeWithProducts;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
@@ -29,10 +29,10 @@ import java.util.Objects;
 
 
 public class WelcomePageFragment extends Fragment {
-    private ProductTypeViewModel productTypeViewModel;
-    private boolean wasExecuted = false;
     private static final String CHANNEL_ID = "channelID";
     private static final String PATTERN = "yyyy-MM-dd";
+    private ProductTypeViewModel productTypeViewModel;
+    private boolean wasExecuted = false;
     private SimpleDateFormat simpleDateFormat;
 
     public WelcomePageFragment() {

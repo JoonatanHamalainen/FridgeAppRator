@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fridgeapprator.R;
-
 import com.example.fridgeapprator.adapter.FridgeProductListAdapter;
-
 import com.example.fridgeapprator.adapter.ProductListAdapter;
 import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,9 +23,8 @@ public class FridgeProductListFragment extends Fragment {
     RecyclerView fridgeRecyclerView;
     FridgeProductListAdapter fridgeProductListAdapter;
     ProductListAdapter productListAdapter;
-
-    private ProductTypeViewModel productTypeViewModel;
     PopUpWindowController popUpWindowController;
+    private ProductTypeViewModel productTypeViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,7 @@ public class FridgeProductListFragment extends Fragment {
         fridgeProductListAdapter = new FridgeProductListAdapter(inflater.getContext());
         productListAdapter = new ProductListAdapter(inflater.getContext());
         popUpWindowController = new PopUpWindowController();
-        productTypeViewModel =  new ViewModelProvider(Objects.requireNonNull(getActivity())).get(ProductTypeViewModel.class);
+        productTypeViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(ProductTypeViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> fridgeProductListAdapter.setProductTypes(productTypes));
 
         View view = inflater.inflate(R.layout.fridge_item_list_fragment, container, false);
@@ -70,7 +67,6 @@ public class FridgeProductListFragment extends Fragment {
 
         return view;
     }
-
 
 
 }

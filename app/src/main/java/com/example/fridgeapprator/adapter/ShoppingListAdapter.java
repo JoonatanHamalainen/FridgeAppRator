@@ -20,20 +20,6 @@ import java.util.Collections;
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> {
 
 
-    static class ShoppingListViewHolder extends RecyclerView.ViewHolder {
-
-
-        private final CheckedTextView shoppingListProductTypeName;
-        private final TextView shoppingListProductTypeAmount;
-
-        public ShoppingListViewHolder(@NonNull View itemView) {
-            super(itemView);
-            this.shoppingListProductTypeName = itemView.findViewById(R.id.productTypeName);
-            this.shoppingListProductTypeAmount = itemView.findViewById(R.id.productTypeAmount);
-
-        }
-    }
-
     private final LayoutInflater inflater;
     private ShoppingListWithShoppingListProducts shoppingListWithItsProducts = null;
 
@@ -76,18 +62,31 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
 
     }
 
-    public void setShoppingListWithItsProducts(ShoppingListWithShoppingListProducts shoppingListWithItsProducts){
+    public void setShoppingListWithItsProducts(ShoppingListWithShoppingListProducts shoppingListWithItsProducts) {
         this.shoppingListWithItsProducts = shoppingListWithItsProducts;
         Collections.reverse(this.shoppingListWithItsProducts.shoppingListProducts);
         notifyDataSetChanged();
     }
 
-
     @Override
     public int getItemCount() {
-        if(shoppingListWithItsProducts != null)
+        if (shoppingListWithItsProducts != null)
             return shoppingListWithItsProducts.shoppingListProducts.size();
         return 0;
+    }
+
+    static class ShoppingListViewHolder extends RecyclerView.ViewHolder {
+
+
+        private final CheckedTextView shoppingListProductTypeName;
+        private final TextView shoppingListProductTypeAmount;
+
+        public ShoppingListViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.shoppingListProductTypeName = itemView.findViewById(R.id.productTypeName);
+            this.shoppingListProductTypeAmount = itemView.findViewById(R.id.productTypeAmount);
+
+        }
     }
 
 
