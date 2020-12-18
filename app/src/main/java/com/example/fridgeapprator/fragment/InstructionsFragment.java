@@ -23,10 +23,12 @@ public class InstructionsFragment extends Fragment {
 
         TextView fridgeInstructionsLink = (TextView) view.findViewById(R.id.instructions_main_header_fridge);
         TextView shoppingListInstructionsLink = (TextView) view.findViewById(R.id.instructions_main_header_shopping_list);
+        TextView notificationsInstructionsLink = (TextView) view.findViewById(R.id.instructions_main_header_notifications);
         fridgeInstructionsLink.setMovementMethod(LinkMovementMethod.getInstance());
         shoppingListInstructionsLink.setMovementMethod(LinkMovementMethod.getInstance());
+        notificationsInstructionsLink.setMovementMethod(LinkMovementMethod.getInstance());
 
-        fridgeInstructionsLink.setOnClickListener(view1 -> {
+        fridgeInstructionsLink.setOnClickListener(instructionsView -> {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             InstructionsFridgeFragment instructionsFridgeFragment = new InstructionsFridgeFragment();
             transaction.addToBackStack(null);
@@ -34,11 +36,19 @@ public class InstructionsFragment extends Fragment {
                     .commit();
         });
 
-        shoppingListInstructionsLink.setOnClickListener(view12 -> {
+        shoppingListInstructionsLink.setOnClickListener(instructionsView -> {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             InstructionsShoppingListFragment instructionsShoppingListFragment = new InstructionsShoppingListFragment();
             transaction.addToBackStack(null);
             transaction.replace(R.id.fragment_container, instructionsShoppingListFragment)
+                    .commit();
+        });
+
+        notificationsInstructionsLink.setOnClickListener(instructionsView -> {
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            InstructionsNotificationsFragment instructionsNotificationsFragment = new InstructionsNotificationsFragment();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragment_container, instructionsNotificationsFragment)
                     .commit();
         });
 
@@ -66,6 +76,17 @@ public class InstructionsFragment extends Fragment {
             super.onCreate(savedInstanceState);
 
             return inflater.inflate(R.layout.instructions_shopping_list_fragment, container, false);
+        }
+    }
+
+    public static class InstructionsNotificationsFragment extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            return inflater.inflate(R.layout.instructions_notifications_fragment, container, false);
         }
     }
 

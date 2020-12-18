@@ -12,4 +12,7 @@
         \n• Tuotteiden merkkaaminen
         \n• Valmiin ostoslistan vieminen Jääkaappiin
     </string>
+    <string name="instructions_main_notifications_text">
+        • Ilmoitusten toiminta
+    </string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="instructionNotificationsFirst">
+        Ohjelma lähettää avautuessaan ilmoituksen jo vanhentuneista tai lähiaikoina vanhenevista
+        tuotteista.
+    </string>
+    <string name="instructionNotificationsSecond">
+        Jos tuotteen viimeinen käyttöpäivä on tämänhetkisestä päivästä alle kolmen
+        päivän päässä tai jo mennyt, näkyy se ilmoituksessa. Ilmoitus näyttää kuitenkin vain
+        ensimmäiset yhdeksän tuotetta viimeisine käyttöpäivineen.
+    </string>
+</resources>
