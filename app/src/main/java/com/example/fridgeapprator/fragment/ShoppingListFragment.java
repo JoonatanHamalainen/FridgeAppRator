@@ -58,33 +58,33 @@ public class ShoppingListFragment extends Fragment {
 
         addButton.setOnClickListener(view1 -> {
 
-            if (!inputNewProductName.getText().toString().equals("") && Integer.parseInt(inputAmount.getText().toString()) > 0) {
-                List<ShoppingListProduct> shoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts;
-                String typeName = inputNewProductName.getText().toString();
-                int amount = Integer.parseInt(inputAmount.getText().toString());
-                boolean found = false;
-                ShoppingListProduct shoppingListProduct = null;
-                for (int i = 0; i < shoppingListProducts.size(); i++) {
-                    shoppingListProduct = shoppingListProducts.get(i);
-                    String name = shoppingListProduct.getProductTypeName();
+            if (!inputNewProductName.getText().toString().equals("") && !inputAmount.getText().toString().equals("")) {
+                if (Integer.parseInt(inputAmount.getText().toString()) > 0) {
+                    List<ShoppingListProduct> shoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts;
+                    String typeName = inputNewProductName.getText().toString();
+                    int amount = Integer.parseInt(inputAmount.getText().toString());
+                    boolean found = false;
+                    ShoppingListProduct shoppingListProduct = null;
+                    for (int i = 0; i < shoppingListProducts.size(); i++) {
+                        shoppingListProduct = shoppingListProducts.get(i);
+                        String name = shoppingListProduct.getProductTypeName();
 
-                    if (name.equals(typeName)) {
-                        found = true;
-                        break;
+                        if (name.equals(typeName)) {
+                            found = true;
+                            break;
+                        }
                     }
+
+                    if (!found) {
+                        shoppingListProductViewModel.insert(new ShoppingListProduct(typeName, amount, 1));
+
+                    } else {
+                        shoppingListProduct.setAmount(shoppingListProduct.getAmount() + amount);
+                        shoppingListProductViewModel.update(shoppingListProduct);
+                    }
+                    inputNewProductName.getText().clear();
+                    inputAmount.setText("");
                 }
-
-                if (!found) {
-                    shoppingListProductViewModel.insert(new ShoppingListProduct(typeName, amount, 1));
-
-                } else {
-                    shoppingListProduct.setAmount(shoppingListProduct.getAmount() + amount);
-                    shoppingListProductViewModel.update(shoppingListProduct);
-                }
-                inputNewProductName.getText().clear();
-                inputAmount.setText("1");
-
-
             } else {
                 Toast.makeText(getActivity(), getResources().getString(R.string.addNewShoppinglistProductToast), Toast.LENGTH_SHORT).show();
             }
@@ -120,7 +120,6 @@ public class ShoppingListFragment extends Fragment {
 
             }
         }));
-
         return view;
     }
 }

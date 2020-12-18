@@ -6,13 +6,13 @@
     <string name="addProduct">Anna Lisättävä Tuote</string>
     <string name="instructions">Ohjeet</string>
     <string name="shoppingListName">Anna Ostoslistan Nimi</string>
-    <string name="defaultAmount">1</string>
+    <string name="hintAmount">0</string>
     <string name="newProductName">Anna Lisättävä Tuote</string>
-    <string name="button_addProduct">Lisää Tuote Jääkaappiin</string>
-    <string name="button_newShoppingList">Luo Uusi Ostoslista</string>
+    <string name="button_addProduct">Jääkaappiin</string>
+    <string name="button_newShoppingList">Ostoslista</string>
     <string name="button_instructions">Ohjeet</string>
     <string name="noProductsFound">No products</string>
-    <string name="popupTextAddNewProduct">Lisää Uusi Tuote Jääkaappiin</string>
+    <string name="popupTextAddNewProduct">Lisää Uusi Tuote</string>
     <string name="expirationDate">Anna Viimeinen Käyttöpäivä</string>
     <string name="importShoppingList">Vie Tuotteet</string>
     <string name="buttonSkipAppProductPopUp">Ohita</string>
