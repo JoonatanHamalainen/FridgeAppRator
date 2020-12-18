@@ -12,8 +12,10 @@ public interface ShoppingListProductDao {
 
     @Insert
     void insert(ShoppingListProduct shoppingListProduct);
+
     @Delete
     void delete(ShoppingListProduct shoppingListProduct);
+
     @Update
     void update(ShoppingListProduct shoppingListProduct);
 

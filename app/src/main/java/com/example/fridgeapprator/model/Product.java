@@ -11,13 +11,12 @@ import java.sql.Date;
 
 @Entity(tableName = "product", foreignKeys = @ForeignKey(entity = ProductType.class, parentColumns = "productTypeID", childColumns = "productTypeID"))
 public class Product {
-    @PrimaryKey(autoGenerate = true)
-    private int productID;
     @NonNull
     private final Date expirationDate;
-
     @ColumnInfo(index = true)
     private final int productTypeID;
+    @PrimaryKey(autoGenerate = true)
+    private int productID;
 
 
     public Product(int productTypeID, @NonNull Date expirationDate) {

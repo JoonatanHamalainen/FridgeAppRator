@@ -8,11 +8,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "producttype")
 public class ProductType {
 
-    @PrimaryKey(autoGenerate = true)
-    private int productTypeID;
     @NonNull
     private final String productTypeName;
-
+    @PrimaryKey(autoGenerate = true)
+    private int productTypeID;
     private int amount;
 
     public ProductType(@NonNull String productTypeName, int amount) {

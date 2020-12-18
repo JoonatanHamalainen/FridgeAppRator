@@ -17,19 +17,6 @@ import java.util.List;
 
 public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProductListAdapter.FridgeProductViewHolder> {
 
-    static class FridgeProductViewHolder extends RecyclerView.ViewHolder {
-
-        private final TextView fridgeProductTypeName;
-        private final TextView fridgeProductTypeAmount;
-
-        private FridgeProductViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            this.fridgeProductTypeName = itemView.findViewById(R.id.productTypeName);
-            this.fridgeProductTypeAmount = itemView.findViewById(R.id.productTypeAmount);
-        }
-    }
-
     private final LayoutInflater inflater;
     private List<ProductTypeWithProducts> productTypes = null;
 
@@ -56,8 +43,7 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
         }
     }
 
-
-    public void setProductTypes(List<ProductTypeWithProducts> productTypes){
+    public void setProductTypes(List<ProductTypeWithProducts> productTypes) {
         this.productTypes = productTypes;
         notifyDataSetChanged();
     }
@@ -67,5 +53,18 @@ public class FridgeProductListAdapter extends RecyclerView.Adapter<FridgeProduct
         if (productTypes != null)
             return productTypes.size();
         else return 0;
+    }
+
+    static class FridgeProductViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView fridgeProductTypeName;
+        private final TextView fridgeProductTypeAmount;
+
+        private FridgeProductViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            this.fridgeProductTypeName = itemView.findViewById(R.id.productTypeName);
+            this.fridgeProductTypeAmount = itemView.findViewById(R.id.productTypeAmount);
+        }
     }
 }

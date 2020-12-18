@@ -10,7 +10,7 @@ public class ShoppingListWithShoppingListProducts {
     @Embedded
     public ShoppingList shoppingList;
 
-    @Relation (
+    @Relation(
             parentColumn = "shoppingListID",
             entityColumn = "shoppingListID"
     )

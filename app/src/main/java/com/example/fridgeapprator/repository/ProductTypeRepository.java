@@ -42,6 +42,7 @@ public class ProductTypeRepository {
     public void delete(ProductType productType) {
         new deleteAsyncTask(productTypeDao).execute(productType);
     }
+
     @SuppressWarnings("deprecation")
     public void update(ProductType productType) {
         new updateAsyncTask(productTypeDao).execute(productType);
@@ -51,9 +52,11 @@ public class ProductTypeRepository {
     @SuppressWarnings("deprecation")
     private static class insertAsyncTask extends AsyncTask<ProductType, Long, Long> {
         private final ProductTypeDao productTypeAsyncTaskDao;
+
         insertAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
+
         @Override
         protected Long doInBackground(ProductType... productTypes) {
             return productTypeAsyncTaskDao.insert(productTypes[0]);
@@ -65,9 +68,11 @@ public class ProductTypeRepository {
     @SuppressWarnings("deprecation")
     private static class updateAsyncTask extends AsyncTask<ProductType, Void, Void> {
         private final ProductTypeDao productTypeAsyncTaskDao;
+
         updateAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
+
         @Override
         protected Void doInBackground(ProductType... productTypes) {
             productTypeAsyncTaskDao.update(productTypes[0]);
@@ -80,16 +85,17 @@ public class ProductTypeRepository {
     @SuppressWarnings("deprecation")
     private static class deleteAsyncTask extends AsyncTask<ProductType, Void, Void> {
         private final ProductTypeDao productTypeAsyncTaskDao;
+
         deleteAsyncTask(ProductTypeDao dao) {
             productTypeAsyncTaskDao = dao;
         }
+
         @Override
         protected Void doInBackground(ProductType... productTypes) {
             productTypeAsyncTaskDao.delete(productTypes[0]);
             return null;
         }
     }
-
 
 
 }

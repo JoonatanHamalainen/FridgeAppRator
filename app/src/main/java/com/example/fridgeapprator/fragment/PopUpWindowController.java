@@ -88,7 +88,6 @@ public class PopUpWindowController {
         });
 
 
-
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         productRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(activity, productRecyclerView, new RecyclerTouchListener.ClickListener() {

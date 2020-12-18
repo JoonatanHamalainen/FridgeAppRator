@@ -21,9 +21,9 @@ public class InstructionsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.instructions_fragment, container, false);
 
-        TextView fridgeInstructionsLink = (TextView) view.findViewById(R.id.instructions_main_header_fridge);
-        TextView shoppingListInstructionsLink = (TextView) view.findViewById(R.id.instructions_main_header_shopping_list);
-        TextView notificationsInstructionsLink = (TextView) view.findViewById(R.id.instructions_main_header_notifications);
+        TextView fridgeInstructionsLink = view.findViewById(R.id.instructions_main_header_fridge);
+        TextView shoppingListInstructionsLink = view.findViewById(R.id.instructions_main_header_shopping_list);
+        TextView notificationsInstructionsLink = view.findViewById(R.id.instructions_main_header_notifications);
         fridgeInstructionsLink.setMovementMethod(LinkMovementMethod.getInstance());
         shoppingListInstructionsLink.setMovementMethod(LinkMovementMethod.getInstance());
         notificationsInstructionsLink.setMovementMethod(LinkMovementMethod.getInstance());

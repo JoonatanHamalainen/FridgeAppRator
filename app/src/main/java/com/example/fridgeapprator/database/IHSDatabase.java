@@ -23,13 +23,22 @@ import com.example.fridgeapprator.model.ShoppingListProduct;
 @Database(entities = {Product.class, ProductType.class, ShoppingList.class, ShoppingListProduct.class}, version = 51, exportSchema = false)
 public abstract class IHSDatabase extends RoomDatabase {
 
-    public abstract ProductDao productDao();
-    public abstract ProductTypeDao productTypeDao();
-    public abstract ShoppingListDao shoppingListDao();
-    public abstract ShoppingListProductDao shoppingListProductDao();
-
-
     private static IHSDatabase INSTANCE;
+    private static final RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+                @Override
+                public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                    super.onOpen(db);
+                }
+
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                    super.onCreate(db);
+                    new PopulateDbAsync(INSTANCE).execute();
+                }
+
+            };
 
     public static IHSDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -47,22 +56,13 @@ public abstract class IHSDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static final RoomDatabase.Callback sRoomDatabaseCallback =
-            new RoomDatabase.Callback(){
-                @Override
-                public void onOpen (@NonNull SupportSQLiteDatabase db){
-                    super.onOpen(db);
-                }
+    public abstract ProductDao productDao();
 
-                @SuppressWarnings("deprecation")
-                @Override
-                public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                    super.onCreate(db);
-                    new PopulateDbAsync(INSTANCE).execute();
-                }
+    public abstract ProductTypeDao productTypeDao();
 
-            };
+    public abstract ShoppingListDao shoppingListDao();
 
+    public abstract ShoppingListProductDao shoppingListProductDao();
 
     @SuppressWarnings("deprecation")
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

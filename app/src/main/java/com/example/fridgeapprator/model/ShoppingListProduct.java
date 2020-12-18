@@ -8,14 +8,13 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "shoppinglistproduct", foreignKeys = @ForeignKey(entity = ShoppingList.class, parentColumns = "shoppingListID", childColumns = "shoppingListID"))
 public class ShoppingListProduct {
-    @PrimaryKey(autoGenerate = true)
-    private int shoppingListProductID;
     @NonNull
     private final String productTypeName;
-
-    private int amount;
     @ColumnInfo(index = true)
     private final int shoppingListID;
+    @PrimaryKey(autoGenerate = true)
+    private int shoppingListProductID;
+    private int amount;
 
     public ShoppingListProduct(@NonNull String productTypeName, int amount, int shoppingListID) {
         this.productTypeName = productTypeName;
@@ -23,12 +22,12 @@ public class ShoppingListProduct {
         this.shoppingListID = shoppingListID;
     }
 
-    public void setShoppingListProductID(int shoppingListProductID) {
-        this.shoppingListProductID = shoppingListProductID;
-    }
-
     public int getShoppingListProductID() {
         return shoppingListProductID;
+    }
+
+    public void setShoppingListProductID(int shoppingListProductID) {
+        this.shoppingListProductID = shoppingListProductID;
     }
 
     @NonNull

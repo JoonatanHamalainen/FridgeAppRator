@@ -37,10 +37,12 @@ public class ShoppingListRepository {
     public void insert(ShoppingList shoppingList) {
         new insertAsyncTask(shoppingListDao).execute(shoppingList);
     }
+
     @SuppressWarnings("deprecation")
-    public void delete (ShoppingList shoppingList) {
+    public void delete(ShoppingList shoppingList) {
         new deleteAsyncTask(shoppingListDao).execute(shoppingList);
     }
+
     @SuppressWarnings("deprecation")
     private static class insertAsyncTask extends AsyncTask<ShoppingList, Void, Void> {
 
@@ -57,6 +59,7 @@ public class ShoppingListRepository {
             return null;
         }
     }
+
     @SuppressWarnings("deprecation")
     private static class deleteAsyncTask extends AsyncTask<ShoppingList, Void, Void> {
 

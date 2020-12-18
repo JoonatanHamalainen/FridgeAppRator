@@ -22,14 +22,17 @@ public class ShoppingListProductRepository {
     public void insert(ShoppingListProduct shoppingListProduct) {
         new insertAsyncTask(shoppingListProductDao).execute(shoppingListProduct);
     }
+
     @SuppressWarnings("deprecation")
     public void delete(ShoppingListProduct shoppingListProduct) {
         new deleteAsyncTask(shoppingListProductDao).execute(shoppingListProduct);
     }
+
     @SuppressWarnings("deprecation")
     public void update(ShoppingListProduct shoppingListProduct) {
         new updateAsyncTask(shoppingListProductDao).execute(shoppingListProduct);
     }
+
     @SuppressWarnings("deprecation")
     private static class insertAsyncTask extends AsyncTask<ShoppingListProduct, Void, Void> {
         private final ShoppingListProductDao shoppingListProductAsyncTaskDao;
@@ -44,6 +47,7 @@ public class ShoppingListProductRepository {
             return null;
         }
     }
+
     @SuppressWarnings("deprecation")
     private static class deleteAsyncTask extends AsyncTask<ShoppingListProduct, Void, Void> {
         private final ShoppingListProductDao shoppingListProductAsyncTaskDao;
@@ -58,6 +62,7 @@ public class ShoppingListProductRepository {
             return null;
         }
     }
+
     @SuppressWarnings("deprecation")
     private static class updateAsyncTask extends AsyncTask<ShoppingListProduct, Void, Void> {
         private final ShoppingListProductDao shoppingListProductAsyncTaskDao;
@@ -72,8 +77,6 @@ public class ShoppingListProductRepository {
             return null;
         }
     }
-
-
 
 
 }
