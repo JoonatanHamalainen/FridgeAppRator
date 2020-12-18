@@ -45,6 +45,8 @@ public class PopUpWindowController {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            //myCalendar.get(Calendar.MONTH) returns January as zero and December as 11
+            //so we need to normalize it before inserting it to the database
             int month = myCalendar.get(Calendar.MONTH) + 1;
             String calendarString = myCalendar.get(Calendar.YEAR) + "-" + month + "-" + myCalendar.get(Calendar.DATE);
             editText.setText(calendarString);
@@ -56,6 +58,7 @@ public class PopUpWindowController {
 
 
     @SuppressLint("ClickableViewAccessibility")
+    //Creates a popup where you are able to view and delete expiration dates (products) of product type
     public void showProductTypeProductsPopUp(View view, ViewGroup container, int position, LayoutInflater inflater,
                                              FragmentActivity activity, LifecycleOwner owner) {
 
@@ -76,6 +79,7 @@ public class PopUpWindowController {
         productTypeViewModel.getAllProductTypes().observe(owner, productTypes -> {
             try {
                 productListAdapter.setProducts(productTypes.get(position).products);
+                //closes an empty popup window
                 if (productTypes.get(position).products.isEmpty()) {
                     popupWindow.dismiss();
                 }
@@ -96,8 +100,10 @@ public class PopUpWindowController {
 
             @Override
             public void onLongClick(View view, int position) {
+                //Fridge product type position is the position of the product type clicked in FridgeProductListFragment.
                 productViewModel.delete(Objects.requireNonNull(productTypeViewModel.getAllProductTypes().getValue()).get(fridgeProductTypePosition).products.get(position));
                 ProductType productType = productTypeViewModel.getAllProductTypes().getValue().get(fridgeProductTypePosition).productType;
+                //Product type amount is decreased in database when one of its products is deleted.
                 productType.setAmount(productType.getAmount() - 1);
                 productTypeViewModel.update(productType);
 
@@ -110,6 +116,7 @@ public class PopUpWindowController {
         });
     }
 
+    //Creates a popup where you are able to insert a product to the fridge
     public void insertSingleProductPopUp(View view, ViewGroup container, LayoutInflater inflater,
                                          FragmentActivity activity, LifecycleOwner owner) {
 
@@ -153,11 +160,14 @@ public class PopUpWindowController {
                         break;
                     }
                 }
+                // if a product with the same name is not found in the fridge add it
                 if (!found) {
 
                     newId = (int) productTypeViewModel.insert(new ProductType(newProductTypeNameValue, 1));
                     productViewModel.insert(new Product(newId, expirationDateValue));
-                } else {
+                }
+                //otherwise increase product type's amount by one and insert a product
+                else {
                     productType.setAmount(productType.getAmount() + 1);
                     productViewModel.insert(new Product(productType.getProductTypeID(), expirationDateValue));
                     productTypeViewModel.update(productType);
@@ -172,6 +182,7 @@ public class PopUpWindowController {
     }
 
     @SuppressLint("ClickableViewAccessibility")
+    //Creates a popup where you are able to insert a date and import a product to the fridge
     public void insertDatesPopUp(View view, ViewGroup container, LayoutInflater inflater,
                                  FragmentActivity activity, LifecycleOwner owner, String typeName) {
 
@@ -212,11 +223,14 @@ public class PopUpWindowController {
                     }
                 }
                 Date expirationDate = Date.valueOf(editText.getText().toString());
+                // if a product with the same name is not found in the fridge add it
                 if (!found) {
 
                     newId = (int) productTypeViewModel.insert(new ProductType(typeName, 1));
                     productViewModel.insert(new Product(newId, expirationDate));
-                } else {
+                }
+                //otherwise increase product type's amount by one and insert a product
+                else {
                     productType.setAmount(productType.getAmount() + 1);
                     productViewModel.insert(new Product(productType.getProductTypeID(), expirationDate));
                     productTypeViewModel.update(productType);
