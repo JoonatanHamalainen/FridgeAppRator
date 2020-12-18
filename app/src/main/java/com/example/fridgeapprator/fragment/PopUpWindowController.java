@@ -32,6 +32,7 @@ import com.example.fridgeapprator.viewModel.ProductViewModel;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 
 public class PopUpWindowController {
@@ -68,8 +69,7 @@ public class PopUpWindowController {
         productRecyclerView.setAdapter(productListAdapter);
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
         int fridgeProductTypePosition = position;
 
@@ -96,7 +96,7 @@ public class PopUpWindowController {
 
             @Override
             public void onLongClick(View view, int position) {
-                productViewModel.delete(productTypeViewModel.getAllProductTypes().getValue().get(fridgeProductTypePosition).products.get(position));
+                productViewModel.delete(Objects.requireNonNull(productTypeViewModel.getAllProductTypes().getValue()).get(fridgeProductTypePosition).products.get(position));
                 ProductType productType = productTypeViewModel.getAllProductTypes().getValue().get(fridgeProductTypePosition).productType;
                 productType.setAmount(productType.getAmount() - 1);
                 productTypeViewModel.update(productType);
@@ -127,8 +127,7 @@ public class PopUpWindowController {
 
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
@@ -145,7 +144,7 @@ public class PopUpWindowController {
                 boolean found = false;
                 ProductType productType = null;
                 int newId;
-                for (int i = 0; i < productTypes.size(); i++) {
+                for (int i = 0; i < Objects.requireNonNull(productTypes).size(); i++) {
                     productType = productTypes.get(i).productType;
                     String name = productType.getProductTypeName();
 
@@ -191,8 +190,7 @@ public class PopUpWindowController {
 
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
@@ -204,7 +202,7 @@ public class PopUpWindowController {
                 boolean found = false;
                 ProductType productType = null;
                 int newId;
-                for (int i = 0; i < productTypes.size(); i++) {
+                for (int i = 0; i < Objects.requireNonNull(productTypes).size(); i++) {
                     productType = productTypes.get(i).productType;
                     String name = productType.getProductTypeName();
 

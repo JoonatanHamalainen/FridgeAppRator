@@ -22,6 +22,7 @@ import com.example.fridgeapprator.viewModel.ShoppingListProductViewModel;
 import com.example.fridgeapprator.viewModel.ShoppingListViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ShoppingListFragment extends Fragment {
 
@@ -42,7 +43,7 @@ public class ShoppingListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         adapter = new ShoppingListAdapter(inflater.getContext());
-        shoppingListViewModel = new ViewModelProvider(getActivity()).get(ShoppingListViewModel.class);
+        shoppingListViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(ShoppingListViewModel.class);
         popUpWindowController = new PopUpWindowController();
         shoppingListProductViewModel = new ViewModelProvider(getActivity()).get(ShoppingListProductViewModel.class);
         shoppingListViewModel.getAllShoppingListProducts().observe(getViewLifecycleOwner(),
@@ -60,7 +61,7 @@ public class ShoppingListFragment extends Fragment {
 
             if (!inputNewProductName.getText().toString().equals("") && !inputAmount.getText().toString().equals("")) {
                 if (Integer.parseInt(inputAmount.getText().toString()) > 0) {
-                    List<ShoppingListProduct> shoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts;
+                    List<ShoppingListProduct> shoppingListProducts = Objects.requireNonNull(shoppingListViewModel.getAllShoppingListProducts().getValue()).shoppingListProducts;
                     String typeName = inputNewProductName.getText().toString();
                     int amount = Integer.parseInt(inputAmount.getText().toString());
                     boolean found = false;
@@ -92,7 +93,7 @@ public class ShoppingListFragment extends Fragment {
 
         importShoppingList.setOnClickListener(view12 -> {
             ShoppingListWithShoppingListProducts shoppingListWithShoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue();
-            for (int i = 0; i < shoppingListWithShoppingListProducts.shoppingListProducts.size(); i++) {
+            for (int i = 0; i < Objects.requireNonNull(shoppingListWithShoppingListProducts).shoppingListProducts.size(); i++) {
                 for (int j = 0; j < shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getAmount(); j++) {
                     popUpWindowController.insertDatesPopUp(view12, container, inflater, getActivity(), getViewLifecycleOwner(),
                             shoppingListWithShoppingListProducts.shoppingListProducts.get(i).getProductTypeName());
@@ -116,7 +117,7 @@ public class ShoppingListFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-                shoppingListProductViewModel.delete(shoppingListViewModel.getAllShoppingListProducts().getValue().shoppingListProducts.get(position));
+                shoppingListProductViewModel.delete(Objects.requireNonNull(shoppingListViewModel.getAllShoppingListProducts().getValue()).shoppingListProducts.get(position));
 
             }
         }));

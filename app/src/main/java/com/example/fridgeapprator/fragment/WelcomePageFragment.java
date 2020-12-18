@@ -25,6 +25,7 @@ import com.example.fridgeapprator.viewModel.ProductTypeViewModel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public class WelcomePageFragment extends Fragment {
@@ -76,7 +77,7 @@ public class WelcomePageFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        productTypeViewModel = new ViewModelProvider(getActivity()).get(ProductTypeViewModel.class);
+        productTypeViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(ProductTypeViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
 
             if (productTypeViewModel.getAllProductTypes().getValue() != null && !wasExecuted) {
@@ -106,20 +107,22 @@ public class WelcomePageFragment extends Fragment {
                     }
                 }
 
-                Spanned formattedResult;
+                if (!result.toString().equals("")) {
+                    Spanned formattedResult;
+                    formattedResult = Html.fromHtml(result.toString(), Html.FROM_HTML_MODE_LEGACY);
 
-                formattedResult = Html.fromHtml(result.toString(), Html.FROM_HTML_MODE_LEGACY);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(Objects.requireNonNull(getContext()));
+                    createNotificationChannel();
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
+                            .setSmallIcon(R.drawable.check)
+                            .setContentTitle(getResources().getString(R.string.notificationTitle))
+                            .setContentText(formattedResult)
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(formattedResult).setBigContentTitle(getResources().getString(R.string.notificationTitle)))
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getContext());
-                createNotificationChannel();
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), CHANNEL_ID)
-                        .setSmallIcon(R.drawable.check)
-                        .setContentTitle(getResources().getString(R.string.notificationTitle))
-                        .setContentText(formattedResult)
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(formattedResult).setBigContentTitle(getResources().getString(R.string.notificationTitle)))
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    notificationManager.notify(0, builder.build());
 
-                notificationManager.notify(0, builder.build());
+                }
 
             }
         });
@@ -133,7 +136,7 @@ public class WelcomePageFragment extends Fragment {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = Objects.requireNonNull(getContext()).getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
     }
