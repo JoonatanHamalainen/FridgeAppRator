@@ -66,20 +66,24 @@ public class PopUpWindowController {
         LinearLayoutManager llm2 = new LinearLayoutManager(activity);
         productRecyclerView.setLayoutManager(llm2);
         productRecyclerView.setAdapter(productListAdapter);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
         int fridgeProductTypePosition = position;
 
         productTypeViewModel.getAllProductTypes().observe(owner, productTypes -> {
             try {
                 productListAdapter.setProducts(productTypes.get(position).products);
+                if (productTypes.get(position).products.isEmpty()) {
+                    popupWindow.dismiss();
+                }
             } catch (Exception ignored) {
             }
         });
 
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
 
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
@@ -234,10 +238,6 @@ public class PopUpWindowController {
             popupWindow.dismiss();
         });
 
-        popupView.setOnTouchListener((v, event) -> {
-            popupWindow.dismiss();
-            return true;
-        });
 
     }
 
