@@ -80,6 +80,7 @@ public class WelcomePageFragment extends Fragment {
         productTypeViewModel = new ViewModelProvider(Objects.requireNonNull(getActivity())).get(ProductTypeViewModel.class);
         productTypeViewModel.getAllProductTypes().observe(getViewLifecycleOwner(), productTypes -> {
 
+            //notifications popup only when program is first started and products are either expiring or expired
             if (productTypeViewModel.getAllProductTypes().getValue() != null && !wasExecuted) {
                 wasExecuted = true;
                 int counter = 0;
@@ -100,6 +101,8 @@ public class WelcomePageFragment extends Fragment {
                         if (productTypeWithProductsList.get(i).products.get(j).getExpirationDate().before(date2)) {
                             result.append(productTypeWithProductsList.get(i).productType.getProductTypeName()).append(": ").append(productTypeWithProductsList.get(i).products.get(j).getExpirationDate()).append("<br>");
                             counter++;
+                            //loop is stopped when 9 expiring or expired products are found
+                            //because notification window can only hold 9 lines after the title
                             if (counter == 9) {
                                 break outerloop;
                             }
@@ -107,6 +110,7 @@ public class WelcomePageFragment extends Fragment {
                     }
                 }
 
+                //notification created only if expiring or expired products were found
                 if (!result.toString().equals("")) {
                     Spanned formattedResult;
                     formattedResult = Html.fromHtml(result.toString(), Html.FROM_HTML_MODE_LEGACY);

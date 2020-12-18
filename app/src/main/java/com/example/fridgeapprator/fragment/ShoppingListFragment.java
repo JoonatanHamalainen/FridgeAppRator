@@ -59,6 +59,8 @@ public class ShoppingListFragment extends Fragment {
 
         addButton.setOnClickListener(view1 -> {
 
+            //if neither one of the edittext fields is empty and amount given isn't under zero,
+            //add a new product to the shopping list
             if (!inputNewProductName.getText().toString().equals("") && !inputAmount.getText().toString().equals("")) {
                 if (Integer.parseInt(inputAmount.getText().toString()) > 0) {
                     List<ShoppingListProduct> shoppingListProducts = Objects.requireNonNull(shoppingListViewModel.getAllShoppingListProducts().getValue()).shoppingListProducts;
@@ -76,10 +78,13 @@ public class ShoppingListFragment extends Fragment {
                         }
                     }
 
+                    // if a product with the same name is not found in shopping list add it
                     if (!found) {
                         shoppingListProductViewModel.insert(new ShoppingListProduct(typeName, amount, 1));
 
-                    } else {
+                    }
+                    //otherwise increase its amount
+                    else {
                         shoppingListProduct.setAmount(shoppingListProduct.getAmount() + amount);
                         shoppingListProductViewModel.update(shoppingListProduct);
                     }
@@ -91,6 +96,8 @@ public class ShoppingListFragment extends Fragment {
             }
         });
 
+        //creates as many popup windows as there are products in the shopping list.
+        // In one popup window you're able to add one product to the fridge.
         importShoppingList.setOnClickListener(view12 -> {
             ShoppingListWithShoppingListProducts shoppingListWithShoppingListProducts = shoppingListViewModel.getAllShoppingListProducts().getValue();
             for (int i = 0; i < Objects.requireNonNull(shoppingListWithShoppingListProducts).shoppingListProducts.size(); i++) {
